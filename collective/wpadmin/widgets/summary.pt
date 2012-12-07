@@ -1,0 +1,3 @@
+<div class="wp-widget">
+<span class="nb_published_post"><tal:nb tal:content="view/how_many_published_post"></tal:nb><tal:label i18n:translate="">Published post</tal:label></span>
+</div>

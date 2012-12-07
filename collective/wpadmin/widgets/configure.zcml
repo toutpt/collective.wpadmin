@@ -1,0 +1,27 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="collective.wpadmin">
+
+  <adapter
+    for="collective.wpadmin.pages.page.IPage"
+    name="analytics"
+    class=".analytics.Analytics"
+    />
+  <adapter
+    for="collective.wpadmin.pages.page.IPage"
+    name="quickpress"
+    class=".quickpress.QuickPress"
+    />
+  <adapter
+    for="collective.wpadmin.pages.page.IPage"
+    name="summarize"
+    class=".summarize.Summarize"
+    />
+
+</configure>
