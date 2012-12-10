@@ -11,17 +11,17 @@
   <adapter
     for="collective.wpadmin.pages.page.IPage"
     name="analytics"
-    class=".analytics.Analytics"
+    factory=".analytics.Analytics"
     />
   <adapter
     for="collective.wpadmin.pages.page.IPage"
     name="quickpress"
-    class=".quickpress.QuickPress"
+    factory=".quickpress.QuickPress"
     />
   <adapter
     for="collective.wpadmin.pages.page.IPage"
-    name="summarize"
-    class=".summarize.Summarize"
+    name="summary"
+    factory=".summary.Summary"
     />
 
 </configure>

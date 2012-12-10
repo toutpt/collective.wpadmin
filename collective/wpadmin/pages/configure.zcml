@@ -8,10 +8,12 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="collective.wpadmin">
 
-   <adapter
-     for="collective.wpadmin.wpadmin_view.IWPAdminView"
-     name="dashboard"
-     class=".dashboard.Dashboard"
-     />
+
+  <browser:page
+    name="wp-admin"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    class=".dashboard.Dashboard"
+    permission="plone.app.controlpanel.Overview"
+    />
 
 </configure>

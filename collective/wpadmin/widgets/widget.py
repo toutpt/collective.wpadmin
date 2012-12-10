@@ -10,14 +10,17 @@ _ = i18n.messageFactory
 class IWidget(interface.Interface):
     """Define a widget for the WP Admin view"""
 
+    name = schema.ASCIILine(title=_(u"Widget name"))
     title = schema.TextLine(title=_(u"Title"))
     description = schema.TextLine(title=_(u"Description"))
-
+    columns = schema.Int(title=_(u"Columns"))
 
 class Widget(object):
+    interface.implements(IWidget)
+    columns = 6
+
     def __init__(self, page):
         self.page = page
-        self.wpadmin = page.wpadmin
         self.context = page.context
         self.request = page.request
         self.cached_tools = {}
@@ -26,6 +29,9 @@ class Widget(object):
     def __call__(self):
         self.update()
         return self.index()
+
+    def update(self):
+        pass
 
     def index(self):
         raise NotImplementedError('widget should implement this')
