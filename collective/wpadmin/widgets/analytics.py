@@ -3,8 +3,9 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
 class Analytics(widget.Widget):
-    index = ViewPageTemplateFile("analytics.pt")
     name="analytics"
+    title = u"Analytics"
+    content = ViewPageTemplateFile("analytics.pt")
 
     def update(self):
         pass

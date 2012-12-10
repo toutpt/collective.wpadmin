@@ -1,0 +1,6 @@
+<div tal:attributes="class string:wpwidget wpwidget-${view/name}">
+<h2><span tal:content="view/title"></span></h2>
+<p class="" tal:content="view/description"></p>
+<div tal:attributes="class string:wpwidget-content wpwidget-content-${view/name}" tal:content="structure view/content">
+</div>
+</div>

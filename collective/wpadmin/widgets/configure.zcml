@@ -23,5 +23,6 @@
     name="summary"
     factory=".summary.Summary"
     />
+  <adapter factory=".quickpress.EmptyPressFormAdapter"/>
 
 </configure>

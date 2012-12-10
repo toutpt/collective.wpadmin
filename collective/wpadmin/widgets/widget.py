@@ -3,6 +3,7 @@ from zope import schema
 
 from collective.wpadmin import i18n
 from Products.CMFCore.utils import getToolByName
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 _ = i18n.messageFactory
 
@@ -18,6 +19,9 @@ class IWidget(interface.Interface):
 class Widget(object):
     interface.implements(IWidget)
     columns = 6
+    index = ViewPageTemplateFile("widget.pt")
+    title = u"Widget"
+    description = u""
 
     def __init__(self, page):
         self.page = page
@@ -32,9 +36,6 @@ class Widget(object):
 
     def update(self):
         pass
-
-    def index(self):
-        raise NotImplementedError('widget should implement this')
 
     def get_tool(self, tool_id):
         if tool_id not in self.cached_tools:
