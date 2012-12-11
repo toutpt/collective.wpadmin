@@ -69,7 +69,8 @@ class PressForm(AutoExtensibleForm, form.Form):
         return post
 
     def publish_post(self, post):
-        pass
+        api.content.transition(obj=post,
+                               transition='publish')
 
     def next_url(self):
         #add status message

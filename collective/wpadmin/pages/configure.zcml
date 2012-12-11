@@ -11,35 +11,35 @@
 
   <browser:page
     name="wp-admin"
-    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    for="*"
     class=".redirect.RedirectDashboard"
     permission="plone.app.controlpanel.Overview"
     />
 
   <browser:page
     name="wp-admin-dashboard"
-    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    for="*"
     class=".dashboard.Dashboard"
     permission="plone.app.controlpanel.Overview"
     />
 
   <browser:page
     name="wp-admin-edit"
-    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    for="*"
     class=".edit.Posts"
     permission="plone.app.controlpanel.Overview"
     />
 
   <browser:page
     name="wp-admin-edit-comments"
-    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    for="*"
     class=".editcomments.Comments"
     permission="plone.app.controlpanel.Overview"
     />
 
   <browser:page
     name="wp-admin-edit-tags"
-    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    for="*"
     class=".edittags.Tags"
     permission="plone.app.controlpanel.Overview"
     />

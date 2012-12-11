@@ -1,16 +1,19 @@
+import logging
+
 from Acquisition import aq_inner
 from zope import interface
 from zope import schema
-
-from collective.wpadmin import i18n
+from z3c.form.interfaces import ISubForm, IFormLayer
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from z3c.form.interfaces import ISubForm, IFormLayer
+
 from plone.z3cform.interfaces import IWrappedForm, IFormWrapper
 from plone.z3cform import z2
 
-_ = i18n.messageFactory
+from collective.wpadmin import i18n
 
+_ = i18n.messageFactory
+logger = logging.getLogger('collective.wpadmin')
 
 class IWidget(interface.Interface):
     """Define a widget for the WP Admin view"""
@@ -49,6 +52,7 @@ class Widget(object):
 
     def query_catalog(self, query):
         catalog = self.get_tool('portal_catalog')
+        logger.info(query)
         return catalog(**query)
 
     def get_query(self):
@@ -89,14 +93,14 @@ class WidgetFormWrapper(Widget):
         if not ISubForm.providedBy(self.form_instance):
             interface.alsoProvides(self.form_instance, IWrappedForm)
 
-        z2.switch_on(self, request_layer=self.request_layer)
-        self.form_instance.update()
-        
         # If a form action redirected, don't render the wrapped form
         if self.request.response.getStatus() in (302, 303):
             self.contents = ""
             return
-        
+
+        z2.switch_on(self, request_layer=self.request_layer)
+        self.form_instance.update()
+
         # A z3c.form.form.AddForm does a redirect in its render method.
         # So we have to render the form to see if we have a redirection.
         # In the case of redirection, we don't render the layout at all.
