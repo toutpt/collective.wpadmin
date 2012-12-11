@@ -1,9 +1,13 @@
+from Acquisition import aq_inner
 from zope import interface
 from zope import schema
 
 from collective.wpadmin import i18n
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from z3c.form.interfaces import ISubForm, IFormLayer
+from plone.z3cform.interfaces import IWrappedForm, IFormWrapper
+from plone.z3cform import z2
 
 _ = i18n.messageFactory
 
@@ -29,7 +33,7 @@ class Widget(object):
         self.context = page.context
         self.request = page.request
         self.cached_tools = {}
-        self.cached_components = {""}
+        self.cached_components = {}
 
     def __call__(self):
         self.update()
@@ -65,3 +69,35 @@ class Widget(object):
                                             (self.context, self.request),
                                             name=cid)
         return self.cached_components[cid]
+
+
+class WidgetFormWrapper(Widget):
+    interface.implements(IFormWrapper)
+
+    form = None # override this with a form class.
+    request_layer = IFormLayer
+
+    def __init__(self, page):
+        super(WidgetFormWrapper, self).__init__(page)
+        if self.form is not None:
+            self.form_instance = self.form(
+                aq_inner(self.context), self.request)
+            self.form_instance.__name__ = self.name
+            self.form_instance.parent_widget = self
+
+    def update(self):
+        if not ISubForm.providedBy(self.form_instance):
+            interface.alsoProvides(self.form_instance, IWrappedForm)
+
+        z2.switch_on(self, request_layer=self.request_layer)
+        self.form_instance.update()
+        
+        # If a form action redirected, don't render the wrapped form
+        if self.request.response.getStatus() in (302, 303):
+            self.contents = ""
+            return
+        
+        # A z3c.form.form.AddForm does a redirect in its render method.
+        # So we have to render the form to see if we have a redirection.
+        # In the case of redirection, we don't render the layout at all.
+        self.contents = self.form_instance.render()

@@ -25,6 +25,11 @@
     <script tal:attributes="src string:${view/site_url}/++resource++collective.wpadmin/js/jquery.js" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script tal:attributes="src string:${view/site_url}/++resource++jquery-ui.min.js" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
     <script tal:attributes="src string:${view/site_url}/++resource++collective.wpadmin/js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="++resource++collective.wpadmin/js/noty/jquery.noty.js"></script>
+    <script type="text/javascript" src="++resource++collective.wpadmin/js/noty/layouts/topRight.js"></script>
+    <script type="text/javascript" src="++resource++collective.wpadmin/js/noty/themes/default.js"></script>
+
     <link rel="shortcut icon" type="image/x-icon" tal:attributes="href string:${view/context_url}/favicon.ico">
   </head>
 
@@ -42,7 +47,7 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <tal:menu tal:repeat="menu view/get_menu">
-                <li><a tal:attributes="href string:{view/context_url}/wpadmin-${menu/id}" tal:content="menu/title"></a></li>
+                <li tal:attributes="class python:view.id == menu['id'] and 'active' or ''"><a tal:attributes="href string:${view/context_url}/wp-admin-${menu/id}" tal:content="menu/title"></a></li>
               </tal:menu>
             </ul>
           </div>
@@ -55,23 +60,24 @@
       <h1 tal:content="view/title"></h1>
       <p tal:content="view/description">Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p>
 
-    <div class="row">
-      <div class="span6">
-        <tal:widget tal:repeat="widget view/left_widgets">
-          <div tal:replace="structure widget"></div>
-        </tal:widget>
-      </div>
-      <div class="span6">
-        <tal:widget tal:repeat="widget view/right_widgets">
-          <div tal:replace="structure widget"></div>
-        </tal:widget>
-      </div>
+	<div class="ui-widget" tal:define="messages view/get_messages" tal:repeat="message messages">
+	  <tal:def tal:define="mtype message/type | nothing;">
+	    <div tal:attributes="class string:statusmessage statusmessage-${mtype}" >
+			<p tal:content="message/message | nothing">
+                The status message.
+            </p>
+		</div>
+	  </tal:def>
+	</div>
+    <div class="row" tal:content="structure view/contents">
     </div>
     <script type="text/javascript">
 $(document).ready(function() {
     $( ".wpwidget" ).accordion({
          collapsible: true
     });
+    $(".statusmessage-info").addClass("ui-state-highlight");
+    $(".statusmessage-error").addClass("ui-state-error");
 });
     </script>
   </body>

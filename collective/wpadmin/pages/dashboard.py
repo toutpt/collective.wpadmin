@@ -1,7 +1,7 @@
-from collective.wpadmin.pages.page import Page
+from collective.wpadmin.pages.page import WidgetsContainer
 
 
-class Dashboard(Page):
+class Dashboard(WidgetsContainer):
     """Dashboard page"""
     id = "dashboard"
     title = u"Dashboard"

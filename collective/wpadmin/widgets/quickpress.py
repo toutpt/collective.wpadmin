@@ -10,18 +10,20 @@ from z3c.form.interfaces import IFormLayer
 
 from plone.autoform.form import AutoExtensibleForm
 from plone.autoform import directives
-from plone.z3cform import z2
-from plone.z3cform.interfaces import IWrappedForm
+from plone.z3cform.interfaces import IWrappedForm, IFormWrapper
 from plone import api
 
 from collective.wpadmin.widgets import widget
+from plone.z3cform.layout import FormWrapper
+from Products.statusmessages.interfaces import IStatusMessage
 
 logger = logging.getLogger('collective.wpadmin')
 
 
 class IPressFormSchema(interface.Interface):
     """Press form schema"""
-    title = schema.TextLine(title=u"Title")
+    title = schema.TextLine(title=u"Title",
+                            required=True)
 #    directives.widget(body='plone.app.z3cform.wysiwyg.WysiwygFieldWidget')
     body = schema.Text(title=u"Body")
     tags = schema.TextLine(title=u"Tags")
@@ -39,6 +41,9 @@ class PressForm(AutoExtensibleForm, form.Form):
         self.next_url()
         data, errors = self.extractData()
         if errors:
+            self.status = self.formErrorsMessage
+            for error in errors:
+                IStatusMessage(self.request).add(error.message, "error")
             return False
         self.create_post(data)
 
@@ -59,6 +64,8 @@ class PressForm(AutoExtensibleForm, form.Form):
                                   title=data['title'],
                                   container=self.context)
         post.setText(data['body'].encode('utf-8'))
+        status = IStatusMessage(self.request)
+        status.add("Post created", "info")
         return post
 
     def publish_post(self, post):
@@ -85,14 +92,8 @@ class IQuickPressSettings(interface.Interface):
                                     default="News Item")
 
 
-class QuickPress(widget.Widget):
+class QuickPress(widget.WidgetFormWrapper):
     name="quickpress"
     title = u"Quick Press"
+    form = PressForm
     content = ViewPageTemplateFile("quickpress.pt")
-
-    def update(self):
-        z2.switch_on(self, request_layer=IFormLayer)
-        self.press_form = PressForm(aq_inner(self.context), self.request)
-        self.press_form.parent_widget = self
-        interface.alsoProvides(self.press_form, IWrappedForm)
-        self.press_form.update()

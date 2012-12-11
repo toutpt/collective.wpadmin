@@ -19,6 +19,7 @@
     name="quickpress"
     factory=".quickpress.QuickPress"
     for="collective.wpadmin.pages.page.IPage"
+    provides=".widget.IWidget"
     />
 
   <adapter

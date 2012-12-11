@@ -8,3 +8,10 @@
 .wpwidget .ui-accordion-content{
     background-color: #ddd;
 }
+.statusmessage{
+	max-width: 400px;
+}
+.statusmessage span{
+	padding: 20px;
+	
+}

@@ -23,4 +23,25 @@
     permission="plone.app.controlpanel.Overview"
     />
 
+  <browser:page
+    name="wp-admin-edit"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    class=".edit.Posts"
+    permission="plone.app.controlpanel.Overview"
+    />
+
+  <browser:page
+    name="wp-admin-edit-comments"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    class=".editcomments.Comments"
+    permission="plone.app.controlpanel.Overview"
+    />
+
+  <browser:page
+    name="wp-admin-edit-tags"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    class=".edittags.Tags"
+    permission="plone.app.controlpanel.Overview"
+    />
+
 </configure>
