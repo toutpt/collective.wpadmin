@@ -6,23 +6,32 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="collective.wpadmin">
 
-  <adapter
-    for="collective.wpadmin.pages.page.IPage"
+  <adapter zcml:condition="installed collective.googleanalytics"
     name="analytics"
     factory=".analytics.Analytics"
-    />
-  <adapter
     for="collective.wpadmin.pages.page.IPage"
+    />
+
+  <adapter
     name="quickpress"
     factory=".quickpress.QuickPress"
-    />
-  <adapter
     for="collective.wpadmin.pages.page.IPage"
+    />
+
+  <adapter
     name="summary"
     factory=".summary.Summary"
+    for="collective.wpadmin.pages.page.IPage"
     />
   <adapter factory=".quickpress.EmptyPressFormAdapter"/>
+
+  <adapter
+    name="recentcomments"
+    factory=".recentcomments.RecentComments"
+    for="collective.wpadmin.pages.page.IPage"
+    />
 
 </configure>

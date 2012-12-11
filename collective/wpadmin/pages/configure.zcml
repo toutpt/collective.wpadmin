@@ -12,6 +12,13 @@
   <browser:page
     name="wp-admin"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    class=".redirect.RedirectDashboard"
+    permission="plone.app.controlpanel.Overview"
+    />
+
+  <browser:page
+    name="wp-admin-dashboard"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
     class=".dashboard.Dashboard"
     permission="plone.app.controlpanel.Overview"
     />

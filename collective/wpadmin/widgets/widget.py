@@ -14,7 +14,7 @@ class IWidget(interface.Interface):
     name = schema.ASCIILine(title=_(u"Widget name"))
     title = schema.TextLine(title=_(u"Title"))
     description = schema.TextLine(title=_(u"Description"))
-    columns = schema.Int(title=_(u"Columns"))
+    settings = schema.Object(interface.Interface, title=_(u"Settings"))
 
 class Widget(object):
     interface.implements(IWidget)
@@ -22,6 +22,7 @@ class Widget(object):
     index = ViewPageTemplateFile("widget.pt")
     title = u"Widget"
     description = u""
+    settings = None
 
     def __init__(self, page):
         self.page = page

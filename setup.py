@@ -29,6 +29,8 @@ setup(name='collective.wpadmin',
       install_requires=[
           'setuptools',
           'collective.googleanalytics',
+          'collective.js.jqueryui',
+          'plone.api',
           # -*- Extra requirements: -*-
       ],
       extras_require = dict(

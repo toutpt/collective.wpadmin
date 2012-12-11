@@ -3,8 +3,9 @@ from collective.wpadmin.pages.page import Page
 
 class Dashboard(Page):
     """Dashboard page"""
-    name = "dashboard"
+    id = "dashboard"
     title = u"Dashboard"
     description = u"Get all you need"
 
-    widget_ids = ["summary", "quickpress", "statistics"]
+    left_widget_ids = ["summary", "recentcomments"]
+    right_widget_ids = ["quickpress", "analytics"]
