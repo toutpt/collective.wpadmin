@@ -31,6 +31,9 @@ setup(name='collective.wpadmin',
           'collective.googleanalytics',
           'collective.js.jqueryui',
           'plone.api',
+          'collective.configviews',
+          'collective.js.datatables',
+          'collective.quickupload',
           # -*- Extra requirements: -*-
       ],
       extras_require = dict(

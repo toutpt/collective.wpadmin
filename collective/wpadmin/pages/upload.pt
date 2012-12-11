@@ -1,0 +1,88 @@
+<div class="span4">
+    <div class="uploaderContainer">
+          <input type="hidden"
+                 name="uploadUrl"
+                 class="uploadUrl"
+                 tal:attributes="value view/quickupload_url" />
+          <input type="hidden"
+                 name="uploadData"
+                 class="uploadData"
+                 value="typeupload=Image&mediaupload=image"/>
+    </div>
+</div>
+<div class="span12">
+<table class="datatable">
+    <thead>
+        <tr>
+            <th>title</th>
+            <th>author</th>
+            <th>type</th>
+            <th>edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr tal:repeat="post view/get_all_media">
+          <td>
+            <a tal:attributes="href string:${post/getURL}/image_view_fullscreen" tal:content="post/Title" data-target="#myModal" data-toggle="modal">Launch demo modal</a>
+          </td>
+          <td tal:content="post/Creator"></td>
+          <td tal:content="post/portal_type"></td>
+          <td>
+            <a tal:attributes="href string:${post/getURL}/edit">edit</a>
+            <a tal:attributes="href string:${post/getURL}/wp-admin-delete_confirmation" data-target="#myModal" data-toggle="modal">delete</a>
+            <a tal:attributes="href string:${post/getURL}/wp-admin-rename" data-target="#myModal" data-toggle="modal">rename</a>
+          </td>
+        </tr>
+     </tbody>
+</table>
+</div>
+<link tal:attributes="href string:${view/site_url}/++resource++quickupload_static/uploadify.css" rel="stylesheet">
+<link tal:attributes="href string:${view/site_url}/++resource++quickupload_static/fileuploader.css" rel="stylesheet">
+<script type="text/javascript" tal:attributes="src string:${view/site_url}/++resource++wp-admin-edit.js"></script>
+<script type="text/javascript" tal:attributes="src string:${view/site_url}/++resource++quickupload_static/swfobject.js"></script>
+<script type="text/javascript" tal:attributes="src string:${view/site_url}/++resource++quickupload_static/jquery.uploadify.js"></script>
+<script type="text/javascript" tal:attributes="src string:${view/site_url}/++resource++quickupload_static/fileuploader.js"></script>
+<script type="text/javascript" tal:attributes="src string:${view/site_url}/++resource++quickupload_static/helpers.js"></script>
+<script  type="text/javascript">
+// workaround this MSIE bug :
+// https://dev.plone.org/plone/ticket/10894
+if (jQuery.browser.msie) jQuery("#settings").remove();
+var Browser = {};
+Browser.onUploadComplete = function() {
+    window.location.reload();
+}
+loadUploader = function() {
+    var ulContainer = jQuery('.uploaderContainer');
+    ulContainer.each(function(){
+        var uploadUrl =  jQuery('.uploadUrl', this).val();
+        var uploadData =  jQuery('.uploadData', this).val();
+        var UlDiv = jQuery(this);
+        jQuery.ajax({
+                   type: 'GET',
+                   url: uploadUrl,
+                   data: uploadData,
+                   dataType: 'html',
+                   contentType: 'text/html; charset=utf-8',
+                   success: function(html) {
+                      UlDiv.html(html);
+                   } });
+    });
+}
+jQuery(document).ready(loadUploader);
+</script>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>​
+<script type="text/javascript">
+$('#myModal').on('shown', function () {
+  console.log('modal shown');
+  $('#myModal .row').toggleClass('row');
+})
+</script>

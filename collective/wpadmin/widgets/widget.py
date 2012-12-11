@@ -52,7 +52,6 @@ class Widget(object):
 
     def query_catalog(self, query):
         catalog = self.get_tool('portal_catalog')
-        logger.info(query)
         return catalog(**query)
 
     def get_query(self):
@@ -73,6 +72,10 @@ class Widget(object):
                                             (self.context, self.request),
                                             name=cid)
         return self.cached_components[cid]
+
+    def log(self, message, type="info"):
+        log = getattr(logger, type)
+        log(message)
 
 
 class WidgetFormWrapper(Widget):

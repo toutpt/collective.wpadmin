@@ -29,6 +29,10 @@
     class=".edit.Posts"
     permission="plone.app.controlpanel.Overview"
     />
+  <browser:resource
+    name="wp-admin-edit.js"
+    file="edit.js"
+    />
 
   <browser:page
     name="wp-admin-edit-comments"
@@ -41,6 +45,33 @@
     name="wp-admin-edit-tags"
     for="*"
     class=".edittags.Tags"
+    permission="plone.app.controlpanel.Overview"
+    />
+
+  <browser:page
+    name="wp-admin-upload"
+    for="*"
+    class=".upload.Media"
+    permission="plone.app.controlpanel.Overview"
+    />
+
+  <!-- wrap different plone actions -->
+  <browser:page
+    name="wp-admin-delete_confirmation"
+    for="*"
+    class=".edit.DeleteConfirmation"
+    permission="plone.app.controlpanel.Overview"
+    />
+  <browser:page
+    name="wp-admin-edit-content"
+    for="*"
+    class=".edit.Edit"
+    permission="plone.app.controlpanel.Overview"
+    />
+  <browser:page
+    name="wp-admin-rename"
+    for="*"
+    class=".edit.DeleteConfirmation"
     permission="plone.app.controlpanel.Overview"
     />
 

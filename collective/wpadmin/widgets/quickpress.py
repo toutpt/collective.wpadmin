@@ -64,6 +64,11 @@ class PressForm(AutoExtensibleForm, form.Form):
                                   title=data['title'],
                                   container=self.context)
         post.setText(data['body'].encode('utf-8'))
+        tags = []
+        for rawtag in data['tags'].split(','):
+            tags.append(rawtag.strip())
+        if tags:
+            post.setSubject(tags)
         status = IStatusMessage(self.request)
         status.add("Post created", "info")
         return post

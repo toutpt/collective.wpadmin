@@ -1,3 +1,5 @@
+import logging
+
 from zope import component
 from zope import interface
 from zope import schema
@@ -5,11 +7,13 @@ from zope.publisher.interfaces.browser import IBrowserRequest
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.Five.browser import BrowserView
 
-from plone.app.layout.globals.interfaces import IViewView
 from plone.app.customerize import registration
+from plone import api
 
 from collective.wpadmin.widgets.widget import IWidget
 from Products.statusmessages.interfaces import IStatusMessage
+
+logger= logging.getLogger('collective.wpadmin')
 
 
 class IPage(interface.Interface):
@@ -35,6 +39,7 @@ class Page(BrowserView):
         self.request = request
         self.all_widgets = {}
         self.cached_components = {}
+        self.cached_tools = {}
 
     def __call__(self):
         self.update()
@@ -46,6 +51,21 @@ class Page(BrowserView):
         pstate = self.get_portal_state()
         self.site_url = pstate.navigation_root_url()
         self.context_url = self.context.absolute_url()
+
+    def get_tool(self, tool_id):
+        if tool_id not in self.cached_tools:
+            tool = api.portal.get_tool(name='portal_catalog')
+            self.cached_tools[tool_id] = tool
+        return self.cached_tools[tool_id]
+
+    def query_catalog(self, query):
+        catalog = self.get_tool('portal_catalog')
+        return catalog(**query)
+
+    def get_query(self):
+        query = {}
+        query['path'] = '/'.join(self.context.getPhysicalPath())
+        return query
 
     def main_title(self):
         return self.context.Title()
@@ -76,6 +96,9 @@ class Page(BrowserView):
     def get_messages(self):
         return IStatusMessage(self.request).show()
 
+    def log(self, message, type="info"):
+        log = getattr(logger, type)
+        log(message)
 
 
 class IWidgetsContainer(IPage):
@@ -110,3 +133,10 @@ class WidgetsContainer(Page):
                 if widget_id in self.all_widgets:
                     widget = self.all_widgets[widget_id]
                     getattr(self, '%s_widgets'%position).append(widget)
+
+
+class PloneActionModal(BrowserView):
+    action=""
+    def __call__(self):
+        self.request['ajax_load'] = True
+        return self.context.restrictedTraverse(self.action)()

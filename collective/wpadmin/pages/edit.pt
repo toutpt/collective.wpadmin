@@ -1,1 +1,42 @@
-TODO
+<div class="span12">
+<table class="datatable">
+    <thead>
+        <tr>
+            <th>title</th>
+            <th>author</th>
+            <th>tags</th>
+            <th>categories</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr tal:repeat="post view/get_all_posts">
+          <td><a tal:attributes="href string:${post/getURL}" tal:content="post/Title"></a></td>
+          <td tal:content="post/Creator"></td>
+          <td tal:content="python:', '.join(post.Subject)"></td>
+          <td></td>
+          <td>
+            <a tal:attributes="href string:${post/getURL}/edit">edit</a>
+            <a tal:attributes="href string:${post/getURL}/wp-admin-delete_confirmation" data-target="#myModal" data-toggle="modal">delete</a>
+            <a tal:attributes="href string:${post/getURL}/wp-admin-rename" data-target="#myModal" data-toggle="modal">rename</a>
+          </td>
+        </tr>
+     </tbody>
+</table>
+</div>
+<script type="text/javascript" tal:attributes="src string:${view/site_url}/++resource++wp-admin-edit.js"></script>
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>​
+<script type="text/javascript">
+$('#myModal').on('shown', function () {
+  console.log('modal shown');
+  $('#myModal .row').toggleClass('row');
+})
+</script>

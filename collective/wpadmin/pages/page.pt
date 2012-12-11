@@ -11,6 +11,7 @@
     <link tal:attributes="href string:${view/site_url}/++resource++collective.wpadmin/css/bootstrap.css" rel="stylesheet">
     <link tal:attributes="href string:${view/site_url}/++resource++collective.wpadmin/css/jquery-ui-bootstrap.css" rel="stylesheet">
     <link tal:attributes="href string:${view/site_url}/++resource++collective.wpadmin/css/wpadmin.css" rel="stylesheet">
+    <link tal:attributes="href string:${view/site_url}/++resource++jquery.datatables/media/css/jquery.dataTables.css" rel="stylesheet">
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -25,10 +26,7 @@
     <script tal:attributes="src string:${view/site_url}/++resource++collective.wpadmin/js/jquery.js" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script tal:attributes="src string:${view/site_url}/++resource++jquery-ui.min.js" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
     <script tal:attributes="src string:${view/site_url}/++resource++collective.wpadmin/js/bootstrap.js"></script>
-
-    <script type="text/javascript" src="++resource++collective.wpadmin/js/noty/jquery.noty.js"></script>
-    <script type="text/javascript" src="++resource++collective.wpadmin/js/noty/layouts/topRight.js"></script>
-    <script type="text/javascript" src="++resource++collective.wpadmin/js/noty/themes/default.js"></script>
+    <script tal:attributes="src string:${view/site_url}/++resource++jquery.datatables.js"></script>
 
     <link rel="shortcut icon" type="image/x-icon" tal:attributes="href string:${view/context_url}/favicon.ico">
   </head>
