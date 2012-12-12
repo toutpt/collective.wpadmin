@@ -1,19 +1,14 @@
-import logging
-
 from zope import component
 from zope import interface
 from zope import schema
 from zope.publisher.interfaces.browser import IBrowserRequest
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.Five.browser import BrowserView
-
-from plone.app.customerize import registration
-from plone import api
+#from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from collective.wpadmin.widgets.widget import IWidget
-from Products.statusmessages.interfaces import IStatusMessage
-
-logger= logging.getLogger('collective.wpadmin')
+from collective.wpadmin.utils import Core
+from plone.app.customerize import registration
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.Five.browser import BrowserView
 
 
 class IPage(interface.Interface):
@@ -27,23 +22,16 @@ class IPage(interface.Interface):
         """Return the page URL"""
 
 
-class Page(BrowserView):
+class Page(Core):
     """Default implementation of IPage"""
     interface.implements(IPage)
-    index = ViewPageTemplateFile("page.pt")
+    template_name = "page.pt"
     title = u"Default page"
     description = u""
 
     def __init__(self, context, request):
-        self.context = context
-        self.request = request
+        Core.__init__(self, context, request)
         self.all_widgets = {}
-        self.cached_components = {}
-        self.cached_tools = {}
-
-    def __call__(self):
-        self.update()
-        return self.index()
 
     def update(self):
         self.request['plone.leftcolumn'] = False
@@ -52,35 +40,12 @@ class Page(BrowserView):
         self.site_url = pstate.navigation_root_url()
         self.context_url = self.context.absolute_url()
 
-    def get_tool(self, tool_id):
-        if tool_id not in self.cached_tools:
-            tool = api.portal.get_tool(name='portal_catalog')
-            self.cached_tools[tool_id] = tool
-        return self.cached_tools[tool_id]
-
-    def query_catalog(self, query):
-        catalog = self.get_tool('portal_catalog')
-        return catalog(**query)
-
-    def get_query(self):
-        query = {}
-        query['path'] = '/'.join(self.context.getPhysicalPath())
-        return query
-
     def main_title(self):
         return self.context.Title()
 
-    def get_portal_state(self):
-        cid = "plone_portal_state"
-        if cid not in self.cached_components:
-            self.cached_components[cid] = component.getMultiAdapter(
-                                            (self.context, self.request),
-                                            name=cid)
-        return self.cached_components[cid]
-
     def get_menu(self):
         menu = []
-        #http://developer.plone.org/views/browserviews.html#listing-available-views
+        #http://developer.plone.org/views/browserviews.html
         views = registration.getViews(IBrowserRequest)
         pages = [view.factory for view in views \
                  if IPage.implementedBy(view.factory)]
@@ -92,13 +57,6 @@ class Page(BrowserView):
 
     def get_url(self):
         return '%s/wp-admin-%s' % (self.context.absolute_url(), self.id)
-
-    def get_messages(self):
-        return IStatusMessage(self.request).show()
-
-    def log(self, message, type="info"):
-        log = getattr(logger, type)
-        log(message)
 
 
 class IWidgetsContainer(IPage):
@@ -129,14 +87,15 @@ class WidgetsContainer(Page):
 
     def _sort_widgets(self):
         for position in ('left', 'right'):
-            for widget_id in getattr(self, '%s_widget_ids'%position, []):
+            for widget_id in getattr(self, '%s_widget_ids' % position, []):
                 if widget_id in self.all_widgets:
                     widget = self.all_widgets[widget_id]
-                    getattr(self, '%s_widgets'%position).append(widget)
+                    getattr(self, '%s_widgets' % position).append(widget)
 
 
 class PloneActionModal(BrowserView):
-    action=""
+    action = ""
+
     def __call__(self):
         self.request['ajax_load'] = True
         return self.context.restrictedTraverse(self.action)()

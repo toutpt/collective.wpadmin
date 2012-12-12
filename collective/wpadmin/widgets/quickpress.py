@@ -1,20 +1,14 @@
 import logging
 
-from Acquisition import aq_inner
 from zope import component
 from zope import interface
 from zope import schema
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from z3c.form import form, button
-from z3c.form.interfaces import IFormLayer
 
 from plone.autoform.form import AutoExtensibleForm
-from plone.autoform import directives
-from plone.z3cform.interfaces import IWrappedForm, IFormWrapper
 from plone import api
 
 from collective.wpadmin.widgets import widget
-from plone.z3cform.layout import FormWrapper
 from Products.statusmessages.interfaces import IStatusMessage
 
 logger = logging.getLogger('collective.wpadmin')
@@ -85,6 +79,7 @@ class PressForm(AutoExtensibleForm, form.Form):
 class EmptyPressFormAdapter(object):
     interface.implements(IPressFormSchema)
     component.adapts(interface.Interface)
+
     def __init__(self, context):
         self.context = context
         self.title = u""
@@ -99,7 +94,7 @@ class IQuickPressSettings(interface.Interface):
 
 
 class QuickPress(widget.WidgetFormWrapper):
-    name="quickpress"
+    name = "quickpress"
     title = u"Quick Press"
     form = PressForm
-    content = ViewPageTemplateFile("quickpress.pt")
+    content_template_name = "quickpress.pt"

@@ -63,12 +63,6 @@
     permission="plone.app.controlpanel.Overview"
     />
   <browser:page
-    name="wp-admin-edit-content"
-    for="*"
-    class=".edit.Edit"
-    permission="plone.app.controlpanel.Overview"
-    />
-  <browser:page
     name="wp-admin-rename"
     for="*"
     class=".edit.DeleteConfirmation"

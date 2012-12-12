@@ -1,5 +1,4 @@
 from collective.wpadmin.widgets import widget
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
 class Summary(widget.Widget):
@@ -8,7 +7,7 @@ class Summary(widget.Widget):
     * total number of comments
     * last drafts
     """
-    content = ViewPageTemplateFile("summary.pt")
+    content_template_name = "summary.pt"
     name = "summary"
     title = u"Summary"
 

@@ -4,16 +4,17 @@ from Acquisition import aq_inner
 from zope import interface
 from zope import schema
 from z3c.form.interfaces import ISubForm, IFormLayer
-from Products.CMFCore.utils import getToolByName
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from plone.z3cform.interfaces import IWrappedForm, IFormWrapper
+from plone.z3cform.interfaces import IWrappedForm
 from plone.z3cform import z2
 
 from collective.wpadmin import i18n
+from collective.wpadmin.utils import Core
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 _ = i18n.messageFactory
 logger = logging.getLogger('collective.wpadmin')
+
 
 class IWidget(interface.Interface):
     """Define a widget for the WP Admin view"""
@@ -23,65 +24,30 @@ class IWidget(interface.Interface):
     description = schema.TextLine(title=_(u"Description"))
     settings = schema.Object(interface.Interface, title=_(u"Settings"))
 
-class Widget(object):
+
+class Widget(Core):
     interface.implements(IWidget)
     columns = 6
-    index = ViewPageTemplateFile("widget.pt")
+    template_name = "widget.pt"
+    content_template_name = ""
     title = u"Widget"
     description = u""
     settings = None
 
     def __init__(self, page):
+        Core.__init__(self, page.context, page.request)
         self.page = page
-        self.context = page.context
-        self.request = page.request
-        self.cached_tools = {}
-        self.cached_components = {}
 
-    def __call__(self):
-        self.update()
-        return self.index()
-
-    def update(self):
-        pass
-
-    def get_tool(self, tool_id):
-        if tool_id not in self.cached_tools:
-            self.cached_tools[tool_id] = getToolByName(self.context, tool_id)
-        return self.cached_tools[tool_id]
-
-    def query_catalog(self, query):
-        catalog = self.get_tool('portal_catalog')
-        return catalog(**query)
-
-    def get_query(self):
-        query = {}
-        query['path'] = '/'.join(self.context.getPhysicalPath())
-        return query
-
-    def get_types(self):
-        return self.get_tool('portal_types')
-
-    def get_workflows(self):
-        return self.get_tools('portal_workflows')
-
-    def get_portal_status(self):
-        cid = "plone_portal_status"
-        if cid not in self.cached_components:
-            self.cached_components[cid] = component.getMultiAdapter(
-                                            (self.context, self.request),
-                                            name=cid)
-        return self.cached_components[cid]
-
-    def log(self, message, type="info"):
-        log = getattr(logger, type)
-        log(message)
+    @property
+    def content(self):
+        return ViewPageTemplateFile(self.content_template_name)
 
 
 class WidgetFormWrapper(Widget):
-    interface.implements(IFormWrapper)
+    """Add support to non browserview for z3c.form
+    multi update/rendering issue when redirection happens"""
 
-    form = None # override this with a form class.
+    form = None  # override this with a form class.
     request_layer = IFormLayer
 
     def __init__(self, page):

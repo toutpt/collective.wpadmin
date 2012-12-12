@@ -1,6 +1,6 @@
-from collective.wpadmin.pages.page import Page, PloneActionModal
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.Five.browser import BrowserView
+
+from collective.wpadmin.pages.page import Page, PloneActionModal
 
 
 class Posts(Page):
@@ -20,8 +20,6 @@ class Posts(Page):
 class DeleteConfirmation(PloneActionModal):
     action = 'delete_confirmation'
 
-class Edit(PloneActionModal):
-    action="base_edit"
 
 class Rename(PloneActionModal):
-    action="rename"
+    action = "rename"

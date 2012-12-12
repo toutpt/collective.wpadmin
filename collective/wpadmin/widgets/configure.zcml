@@ -11,19 +11,21 @@
 
   <adapter zcml:condition="installed collective.googleanalytics"
     name="analytics"
+    provides=".widget.IWidget"
     factory=".analytics.Analytics"
     for="collective.wpadmin.pages.page.IPage"
     />
 
   <adapter
     name="quickpress"
+    provides=".widget.IWidget"
     factory=".quickpress.QuickPress"
     for="collective.wpadmin.pages.page.IPage"
-    provides=".widget.IWidget"
     />
 
   <adapter
     name="summary"
+    provides=".widget.IWidget"
     factory=".summary.Summary"
     for="collective.wpadmin.pages.page.IPage"
     />
@@ -31,6 +33,7 @@
 
   <adapter
     name="recentcomments"
+    provides=".widget.IWidget"
     factory=".recentcomments.RecentComments"
     for="collective.wpadmin.pages.page.IPage"
     />
