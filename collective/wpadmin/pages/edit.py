@@ -9,7 +9,7 @@ class Posts(Page):
     title = u"Posts"
     description = u"Manage your posts"
 
-    contents = ViewPageTemplateFile("edit.pt")
+    content_template_name = "edit.pt"
 
     def get_all_posts(self):
         query = self.get_query()

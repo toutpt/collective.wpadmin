@@ -1,5 +1,4 @@
 from collective.wpadmin.pages.page import Page
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
 class Tags(Page):
@@ -8,4 +7,4 @@ class Tags(Page):
     title = u"Tags"
     description = u"Manage your tags"
 
-    contents = ViewPageTemplateFile("edittags.pt")
+    content_template_name = "edittags.pt"

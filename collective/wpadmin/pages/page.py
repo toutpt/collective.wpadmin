@@ -2,13 +2,12 @@ from zope import component
 from zope import interface
 from zope import schema
 from zope.publisher.interfaces.browser import IBrowserRequest
-#from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from collective.wpadmin.widgets.widget import IWidget
 from collective.wpadmin.utils import Core
 from plone.app.customerize import registration
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.Five.browser import BrowserView
 
 
 class IPage(interface.Interface):
@@ -26,6 +25,7 @@ class Page(Core):
     """Default implementation of IPage"""
     interface.implements(IPage)
     template_name = "page.pt"
+    content_template_name = ""
     title = u"Default page"
     description = u""
 
@@ -39,6 +39,9 @@ class Page(Core):
         pstate = self.get_portal_state()
         self.site_url = pstate.navigation_root_url()
         self.context_url = self.context.absolute_url()
+        if self.content_template_name:
+            template_name = '../templates/%s' % self.content_template_name
+            self.contents = ViewPageTemplateFile(template_name)(self)
 
     def main_title(self):
         return self.context.Title()
@@ -67,7 +70,7 @@ class IWidgetsContainer(IPage):
 class WidgetsContainer(Page):
     left_widget_ids = []
     right_widget_ids = []
-    contents = ViewPageTemplateFile("widgetscontainer_contents.pt")
+    content_template_name = "widgetscontainer_contents.pt"
 
     def __init__(self, context, request):
         super(WidgetsContainer, self).__init__(context, request)
@@ -75,7 +78,6 @@ class WidgetsContainer(Page):
         self.right_widgets = []
 
     def update(self):
-        super(WidgetsContainer, self).update()
         if not self.left_widgets and not self.right_widgets:
             widgets = list(component.getAdapters((self,), IWidget))
 
@@ -84,6 +86,7 @@ class WidgetsContainer(Page):
                 self.all_widgets[name] = widget
 
             self._sort_widgets()
+        super(WidgetsContainer, self).update()
 
     def _sort_widgets(self):
         for position in ('left', 'right'):

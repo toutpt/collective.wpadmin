@@ -40,7 +40,8 @@ class Widget(Core):
 
     @property
     def content(self):
-        return ViewPageTemplateFile(self.content_template_name)
+        template = '../templates/%s' % self.content_template_name
+        return ViewPageTemplateFile(template)(self)
 
 
 class WidgetFormWrapper(Widget):

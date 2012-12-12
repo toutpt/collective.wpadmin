@@ -25,11 +25,11 @@ class Core(BrowserView):
 
     @property
     def index(self):
-        return ViewPageTemplateFile(self.template_name)
+        return ViewPageTemplateFile('templates/%s' % self.template_name)
 
     def __call__(self):
         self.update()
-        return self.index()
+        return self.index(self)
 
     def update(self):
         pass

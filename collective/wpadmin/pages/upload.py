@@ -1,5 +1,4 @@
 from collective.wpadmin.pages.page import Page
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
 class Media(Page):
@@ -8,7 +7,7 @@ class Media(Page):
     title = u"Media"
     description = u"Manage your medias"
 
-    contents = ViewPageTemplateFile("upload.pt")
+    content_template_name = "upload.pt"
 
     def get_all_media(self):
         query = self.get_query()

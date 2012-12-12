@@ -1,5 +1,4 @@
 from collective.wpadmin.pages.page import Page
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
 class Comments(Page):
@@ -8,4 +7,4 @@ class Comments(Page):
     title = u"Comments"
     description = u"Manage your comments"
 
-    contents = ViewPageTemplateFile("editcomments.pt")
+    content_template_name = "editcomments.pt"
