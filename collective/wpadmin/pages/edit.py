@@ -6,6 +6,7 @@ class Posts(Page):
     id = "edit"
     title = u"Posts"
     description = u"Manage your posts"
+    icon = "icon-folder-open"
 
     content_template_name = "edit.pt"
 
@@ -17,6 +18,7 @@ class Posts(Page):
 
 class DeleteConfirmation(PloneActionModal):
     action = "delete_confirmation"
+    ajax_load = False
 
 
 class BaseEdit(PloneActionModal):

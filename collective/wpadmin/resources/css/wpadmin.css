@@ -23,3 +23,7 @@
 	width: 100px;
 	height: 100px;
 }
+.uploaderContainer{
+	max-width: 300px;
+	float: right;
+}

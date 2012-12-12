@@ -53,8 +53,10 @@ class Page(Core):
                  if IPage.implementedBy(view.factory)]
 
         for page in pages:
-            menu.append({'id': page.id,
-                         'title': page.title})
+            menu_info = {'id': page.id,
+                         'title': page.title,
+                         'icon': page.icon}
+            menu.append(menu_info)
         return menu
 
     def get_url(self):

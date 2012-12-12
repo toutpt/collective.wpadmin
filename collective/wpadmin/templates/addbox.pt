@@ -49,7 +49,7 @@ loadUploader = function() {
                       UlDiv.html(html);
                    } });
     });
-    ulContainer.height(100);
+    ulContainer.height(150);
 }
 jQuery(document).ready(loadUploader);
 </script>

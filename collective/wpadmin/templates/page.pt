@@ -10,8 +10,9 @@
     <!-- Le styles -->
     <link tal:attributes="href string:${view/site_url}/++resource++collective.wpadmin/css/bootstrap.css" rel="stylesheet">
     <link tal:attributes="href string:${view/site_url}/++resource++collective.wpadmin/css/jquery-ui-bootstrap.css" rel="stylesheet">
-    <link tal:attributes="href string:${view/site_url}/++resource++collective.wpadmin/css/wpadmin.css" rel="stylesheet">
+    <link tal:attributes="href string:${view/site_url}/forms.css" rel="stylesheet">
     <link tal:attributes="href string:${view/site_url}/++resource++jquery.datatables/media/css/jquery.dataTables.css" rel="stylesheet">
+    <link tal:attributes="href string:${view/site_url}/++resource++collective.wpadmin/css/wpadmin.css" rel="stylesheet">
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -41,11 +42,19 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" tal:attributes="href view/context_url" tal:content="view/main_title"></a>
+          <a class="brand" tal:attributes="href view/context_url">
+            <i class="icon-share-alt icon-white"></i>
+            <tal:title tal:content="view/main_title"></tal:title>
+          </a>
           <div class="nav-collapse collapse">
             <ul class="nav">
               <tal:menu tal:repeat="menu view/get_menu">
-                <li tal:attributes="class python:view.id == menu['id'] and 'active' or ''"><a tal:attributes="href string:${view/context_url}/wp-admin-${menu/id}" tal:content="menu/title"></a></li>
+                <li tal:attributes="class python:view.id == menu['id'] and 'active' or ''">
+                  <a tal:attributes="href string:${view/context_url}/wp-admin-${menu/id}">
+                    <i tal:condition="menu/icon|nothing" tal:attributes="class string:${menu/icon} icon-white"></i>
+                    <span tal:replace="menu/title"></span>
+                  </a>
+                </li>
               </tal:menu>
             </ul>
           </div>
@@ -54,10 +63,9 @@
     </div>
 
     <div class="container">
-
-      <h1 tal:content="view/title"></h1>
-      <p tal:content="view/description">Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p>
-
+    <div class="page-header">
+      <h1><tal:title tal:content="view/title"></tal:title><br/><small tal:content="view/description">Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</small></h1>
+    </div>
 	<div class="ui-widget" tal:define="messages view/get_messages" tal:repeat="message messages">
 	  <tal:def tal:define="mtype message/type | nothing;">
 	    <div tal:attributes="class string:statusmessage statusmessage-${mtype}" >
@@ -72,20 +80,12 @@
 <!-- Modal -->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-body">
-    <p>One fine body…</p>
+    <p>Loading, please wait</p>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
   </div>
 </div>​
-<script type="text/javascript">
-$('#myModal').on('shown', function () {
-  var modal_content = $('#myModal #content').html();
-  $('#myModal .modal-body').html(modal_content);
-  $('#myModal form ul.formTabs').remove();
-})
-</script>
-
 <script type="text/javascript">
 $(document).ready(function() {
     $( ".wpwidget" ).accordion({
@@ -93,6 +93,21 @@ $(document).ready(function() {
     });
     $(".statusmessage-info").addClass("ui-state-highlight");
     $(".statusmessage-error").addClass("ui-state-error");
+
+    $('.datatable').dataTable( {
+        "oLanguage": {
+            "sUrl": "@@collective.js.datatables.translation"
+        }
+    } );
+    $('#myModal').on('shown', function () {
+      var modal_content = $('#myModal #content').html();
+      $('#myModal .modal-body').html(modal_content);
+      $('#myModal form ul.formTabs').remove();
+    });
+    $('#myModal').on('hidden', function () {
+        window.location.reload();
+    })
+
 });
     </script>
   </body>

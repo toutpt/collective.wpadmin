@@ -6,6 +6,7 @@ class Dashboard(WidgetsContainer):
     id = "dashboard"
     title = u"Dashboard"
     description = u"Get all you need"
+    icon = "icon-th-large"
 
     left_widget_ids = ["summary", "recentcomments"]
     right_widget_ids = ["addbox"]

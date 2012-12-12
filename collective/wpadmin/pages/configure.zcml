@@ -29,10 +29,6 @@
     class=".edit.Posts"
     permission="plone.app.controlpanel.Overview"
     />
-  <browser:resource
-    name="wp-admin-edit.js"
-    file="edit.js"
-    />
 
   <browser:page
     name="wp-admin-upload"

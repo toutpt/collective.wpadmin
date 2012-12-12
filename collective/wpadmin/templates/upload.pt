@@ -1,14 +1,12 @@
-<div class="span4">
-    <div class="uploaderContainer">
-          <input type="hidden"
-                 name="uploadUrl"
-                 class="uploadUrl"
-                 tal:attributes="value view/quickupload_url" />
-          <input type="hidden"
-                 name="uploadData"
-                 class="uploadData"
-                 value="typeupload=Image&mediaupload=image"/>
-    </div>
+<div class="uploaderContainer">
+      <input type="hidden"
+             name="uploadUrl"
+             class="uploadUrl"
+             tal:attributes="value view/quickupload_url" />
+      <input type="hidden"
+             name="uploadData"
+             class="uploadData"
+             value="typeupload=Image&mediaupload=image"/>
 </div>
 <div class="span12">
 <table class="datatable">
@@ -30,9 +28,9 @@
               <img class="img-rounded" tal:condition="python:post.portal_type=='Image'" tal:attributes="src string:${post/getURL}/image_thumb"/>
           </td>
           <td>
-            <a tal:attributes="href string:${post/getURL}/wp-admin-base-edit" data-target="#myModal" data-toggle="modal">edit</a>
-            <a tal:attributes="href string:${post/getURL}/wp-admin-delete_confirmation" data-target="#myModal" data-toggle="modal">delete</a>
-            <a tal:attributes="href string:${post/getURL}/wp-admin-rename" data-target="#myModal" data-toggle="modal">rename</a>
+            <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-base-edit" data-target="#myModal" data-toggle="modal">edit</a>
+            <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-rename" data-target="#myModal" data-toggle="modal">rename</a>
+            <a class="btn btn-danger" tal:attributes="href string:${post/getURL}/wp-admin-delete_confirmation" data-target="#myModal" data-toggle="modal">delete</a>
           </td>
         </tr>
      </tbody>
@@ -72,4 +70,3 @@ loadUploader = function() {
 }
 jQuery(document).ready(loadUploader);
 </script>
-

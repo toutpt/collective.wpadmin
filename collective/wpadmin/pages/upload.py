@@ -6,6 +6,7 @@ class Media(Page):
     id = "upload"
     title = u"Media"
     description = u"Manage your medias"
+    icon = "icon-picture"
 
     content_template_name = "upload.pt"
 
