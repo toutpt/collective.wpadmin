@@ -9,6 +9,7 @@ from plone.app.customerize import registration
 from plone import api
 
 from Products.statusmessages.interfaces import IStatusMessage
+from zope.schema.interfaces import IVocabularyFactory
 
 logger = logging.getLogger('collective.wpadmin')
 
@@ -34,9 +35,14 @@ class Core(BrowserView):
     def update(self):
         pass
 
+    @property
+    def site_url(self):
+        pstate = self.get_portal_state()
+        return pstate.navigation_root_url()
+
     def get_tool(self, tool_id):
         if tool_id not in self.cached_tools:
-            tool = api.portal.get_tool(name='portal_catalog')
+            tool = api.portal.get_tool(name=tool_id)
             self.cached_tools[tool_id] = tool
         return self.cached_tools[tool_id]
 
@@ -48,6 +54,14 @@ class Core(BrowserView):
         query = {}
         query['path'] = '/'.join(self.context.getPhysicalPath())
         return query
+
+    def get_vocabulary(self, name=""):
+        cid = "vocabulary_%s" % name
+        if cid not in self.cached_components:
+            self.cached_components[cid] = component.queryUtility(
+                                            IVocabularyFactory,
+                                            name=name)
+        return self.cached_components[cid]
 
     def get_portal_state(self):
         cid = "plone_portal_state"

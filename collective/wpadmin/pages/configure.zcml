@@ -35,20 +35,6 @@
     />
 
   <browser:page
-    name="wp-admin-edit-comments"
-    for="*"
-    class=".editcomments.Comments"
-    permission="plone.app.controlpanel.Overview"
-    />
-
-  <browser:page
-    name="wp-admin-edit-tags"
-    for="*"
-    class=".edittags.Tags"
-    permission="plone.app.controlpanel.Overview"
-    />
-
-  <browser:page
     name="wp-admin-upload"
     for="*"
     class=".upload.Media"
@@ -65,8 +51,31 @@
   <browser:page
     name="wp-admin-rename"
     for="*"
-    class=".edit.DeleteConfirmation"
+    class=".edit.Rename"
     permission="plone.app.controlpanel.Overview"
     />
+  <browser:page
+    name="wp-admin-base-edit"
+    for="*"
+    class=".edit.BaseEdit"
+    permission="plone.app.controlpanel.Overview"
+    />
+
+  <!-- TODO
+
+  <browser:page
+    name="wp-admin-edit-comments"
+    for="*"
+    class=".editcomments.Comments"
+    permission="plone.app.controlpanel.Overview"
+    />
+
+  <browser:page
+    name="wp-admin-edit-tags"
+    for="*"
+    class=".edittags.Tags"
+    permission="plone.app.controlpanel.Overview"
+    />
+  -->
 
 </configure>

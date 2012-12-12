@@ -10,8 +10,16 @@
 }
 .statusmessage{
 	max-width: 400px;
+	float:right;
 }
 .statusmessage span{
 	padding: 20px;
 	
+}
+.wpwidget .ui-widget-content a{
+    color: White;
+}
+.page-upload .img-rounded{
+	width: 100px;
+	height: 100px;
 }

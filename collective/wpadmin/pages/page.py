@@ -34,10 +34,9 @@ class Page(Core):
         self.all_widgets = {}
 
     def update(self):
+        Core.update(self)
         self.request['plone.leftcolumn'] = False
         self.request['plone.rightcolumn'] = False
-        pstate = self.get_portal_state()
-        self.site_url = pstate.navigation_root_url()
         self.context_url = self.context.absolute_url()
         if self.content_template_name:
             template_name = '../templates/%s' % self.content_template_name
@@ -98,7 +97,8 @@ class WidgetsContainer(Page):
 
 class PloneActionModal(BrowserView):
     action = ""
+    ajax_load = True
 
     def __call__(self):
-        self.request['ajax_load'] = True
+        self.request['ajax_load'] = self.ajax_load
         return self.context.restrictedTraverse(self.action)()

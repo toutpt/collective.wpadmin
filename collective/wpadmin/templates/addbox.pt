@@ -1,0 +1,55 @@
+<div class="uploaderContainer">
+      <input type="hidden"
+             name="uploadUrl"
+             class="uploadUrl"
+             tal:attributes="value view/quickupload_url" />
+      <input type="hidden"
+             name="uploadData"
+             class="uploadData"
+             value="typeupload=Image&mediaupload=image"/>
+</div>
+
+<a class="btn btn-primary" tal:attributes="href string:${view/site_url}/wp-admin-addboxmodal" data-target="#myModal" data-toggle="modal">Add a new content</a>
+
+<div class="dropdown" tal:replace="nothing">
+ <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">Add new<b class="caret"></b></a>
+ <ul class="content-types dropdown-menu" role="menu" aria-labelledby="dLabel">
+  <li tal:repeat="contenttype view/get_content_types">
+     <a tal:attributes="href string:${view/context/absolute_url}/createObject?type_name=${contenttype/id}" tal:content="contenttype/title">Add new blog</a>
+  </li>
+ </ul>
+</div>
+<link tal:attributes="href string:${view/site_url}/++resource++quickupload_static/uploadify.css" rel="stylesheet">
+<link tal:attributes="href string:${view/site_url}/++resource++quickupload_static/fileuploader.css" rel="stylesheet">
+<script type="text/javascript" tal:attributes="src string:${view/site_url}/++resource++quickupload_static/swfobject.js"></script>
+<script type="text/javascript" tal:attributes="src string:${view/site_url}/++resource++quickupload_static/jquery.uploadify.js"></script>
+<script type="text/javascript" tal:attributes="src string:${view/site_url}/++resource++quickupload_static/fileuploader.js"></script>
+<script type="text/javascript" tal:attributes="src string:${view/site_url}/++resource++quickupload_static/helpers.js"></script>
+<script  type="text/javascript">
+// workaround this MSIE bug :
+// https://dev.plone.org/plone/ticket/10894
+if (jQuery.browser.msie) jQuery("#settings").remove();
+var Browser = {};
+Browser.onUploadComplete = function() {
+    window.location.reload();
+}
+loadUploader = function() {
+    var ulContainer = jQuery('.uploaderContainer');
+    ulContainer.each(function(){
+        var uploadUrl =  jQuery('.uploadUrl', this).val();
+        var uploadData =  jQuery('.uploadData', this).val();
+        var UlDiv = jQuery(this);
+        jQuery.ajax({
+                   type: 'GET',
+                   url: uploadUrl,
+                   data: uploadData,
+                   dataType: 'html',
+                   contentType: 'text/html; charset=utf-8',
+                   success: function(html) {
+                      UlDiv.html(html);
+                   } });
+    });
+    ulContainer.height(100);
+}
+jQuery(document).ready(loadUploader);
+</script>

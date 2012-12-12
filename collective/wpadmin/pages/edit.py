@@ -1,5 +1,3 @@
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
 from collective.wpadmin.pages.page import Page, PloneActionModal
 
 
@@ -18,8 +16,13 @@ class Posts(Page):
 
 
 class DeleteConfirmation(PloneActionModal):
-    action = 'delete_confirmation'
+    action = "delete_confirmation"
+
+
+class BaseEdit(PloneActionModal):
+    action = "base_edit"
+    ajax_load = False
 
 
 class Rename(PloneActionModal):
-    action = "rename"
+    action = "object_rename"

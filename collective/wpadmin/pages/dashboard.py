@@ -8,4 +8,4 @@ class Dashboard(WidgetsContainer):
     description = u"Get all you need"
 
     left_widget_ids = ["summary", "recentcomments"]
-    right_widget_ids = ["quickpress", "analytics"]
+    right_widget_ids = ["addbox"]

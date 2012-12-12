@@ -38,4 +38,18 @@
     for="collective.wpadmin.pages.page.IPage"
     />
 
+  <adapter
+    name="addbox"
+    provides=".widget.IWidget"
+    factory=".addbox.Addbox"
+    for="collective.wpadmin.pages.page.IPage"
+    />
+
+  <browser:page
+    name="wp-admin-addboxmodal"
+    for="*"
+    class=".addbox.AddModal"
+    permission="plone.app.controlpanel.Overview"
+    />
+
 </configure>

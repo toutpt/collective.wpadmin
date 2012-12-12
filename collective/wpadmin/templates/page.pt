@@ -31,7 +31,7 @@
     <link rel="shortcut icon" type="image/x-icon" tal:attributes="href string:${view/context_url}/favicon.ico">
   </head>
 
-  <body>
+  <body tal:attributes="class string:page-${view/id}">
 
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -69,7 +69,24 @@
 	</div>
     <div class="row" tal:content="structure view/contents">
     </div>
-    <script type="text/javascript">
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>​
+<script type="text/javascript">
+$('#myModal').on('shown', function () {
+  var modal_content = $('#myModal #content').html();
+  $('#myModal .modal-body').html(modal_content);
+  $('#myModal form ul.formTabs').remove();
+})
+</script>
+
+<script type="text/javascript">
 $(document).ready(function() {
     $( ".wpwidget" ).accordion({
          collapsible: true
