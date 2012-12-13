@@ -1,4 +1,7 @@
 from collective.wpadmin.widgets import widget
+from collective.wpadmin import i18n
+
+_ = i18n.messageFactory
 
 
 class Summary(widget.Widget):
@@ -9,7 +12,7 @@ class Summary(widget.Widget):
     """
     content_template_name = "summary.pt"
     name = "summary"
-    title = u"Summary"
+    title = _(u"Summary")
 
     def how_many_published_post(self):
         query = self.get_query()

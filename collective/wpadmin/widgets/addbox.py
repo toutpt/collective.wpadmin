@@ -1,10 +1,13 @@
 from collective.wpadmin.widgets import widget
 from collective.wpadmin.pages.page import PloneActionModal
+from collective.wpadmin import i18n
+
+_ = i18n.messageFactory
 
 
 class Addbox(widget.Widget):
     name = "addbox"
-    title = u"Add box"
+    title = _(u"Add box")
     content_template_name = "addbox.pt"
 
     def quickupload_url(self):

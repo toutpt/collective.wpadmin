@@ -1,11 +1,14 @@
 from collective.wpadmin.pages.page import Page
+from collective.wpadmin import i18n
+
+_ = i18n.messageFactory
 
 
 class Media(Page):
     """Media page"""
     id = "upload"
-    title = u"Media"
-    description = u"Manage your medias"
+    title = _(u"Media")
+    description = _(u"Manage your medias")
     icon = "icon-picture"
 
     content_template_name = "upload.pt"

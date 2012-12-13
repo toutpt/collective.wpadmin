@@ -1,5 +1,3 @@
-import logging
-
 from zope import component
 from zope import interface
 from zope import schema
@@ -10,27 +8,28 @@ from plone import api
 
 from collective.wpadmin.widgets import widget
 from Products.statusmessages.interfaces import IStatusMessage
+from collective.wpadmin import i18n
 
-logger = logging.getLogger('collective.wpadmin')
+_ = i18n.messageFactory
 
 
 class IPressFormSchema(interface.Interface):
     """Press form schema"""
-    title = schema.TextLine(title=u"Title",
+    title = schema.TextLine(title=_(u"Title"),
                             required=True)
 #    directives.widget(body='plone.app.z3cform.wysiwyg.WysiwygFieldWidget')
-    body = schema.Text(title=u"Body")
-    tags = schema.TextLine(title=u"Tags")
+    body = schema.Text(title=_(u"Body"))
+    tags = schema.TextLine(title=_(u"Tags"))
 
 
 class PressForm(AutoExtensibleForm, form.Form):
     schema = IPressFormSchema
 
-    @button.buttonAndHandler(u"reset")
+    @button.buttonAndHandler(_(u"reset"))
     def action_reset(self, action):
         self.next_url()
 
-    @button.buttonAndHandler(u"save")
+    @button.buttonAndHandler(_(u"save"))
     def action_save(self, action):
         self.next_url()
         data, errors = self.extractData()
@@ -41,7 +40,7 @@ class PressForm(AutoExtensibleForm, form.Form):
             return False
         self.create_post(data)
 
-    @button.buttonAndHandler(u"publish")
+    @button.buttonAndHandler(_(u"publish"))
     def action_publish(self, action):
         self.next_url()
         data, errors = self.extractData()
@@ -51,7 +50,6 @@ class PressForm(AutoExtensibleForm, form.Form):
         self.publish_post(post)
 
     def create_post(self, data):
-        logger.info('create post')
         if not hasattr(self, 'post_type'):
             self.post_type = 'News Item'
         post = api.content.create(type=self.post_type,
@@ -95,6 +93,6 @@ class IQuickPressSettings(interface.Interface):
 
 class QuickPress(widget.WidgetFormWrapper):
     name = "quickpress"
-    title = u"Quick Press"
+    title = _(u"Quick Press")
     form = PressForm
     content_template_name = "quickpress.pt"

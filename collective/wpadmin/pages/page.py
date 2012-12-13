@@ -8,14 +8,17 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from collective.wpadmin.widgets.widget import IWidget
 from collective.wpadmin.utils import Core
 from plone.app.customerize import registration
+from collective.wpadmin import i18n
+
+_ = i18n.messageFactory
 
 
 class IPage(interface.Interface):
     """a page is a set of wigets which provide administration screens"""
 
-    id = schema.ASCIILine(title=u"Page ID")
-    title = schema.TextLine(title=u"Title")
-    description = schema.Text(title=u"Description")
+    id = schema.ASCIILine(title=(u"Page ID"))
+    title = schema.TextLine(title=_(u"Title"))
+    description = schema.Text(title=_(u"Description"))
 
     def get_url():
         """Return the page URL"""
@@ -26,7 +29,7 @@ class Page(Core):
     interface.implements(IPage)
     template_name = "page.pt"
     content_template_name = ""
-    title = u"Default page"
+    title = _(u"Default page")
     description = u""
 
     def __init__(self, context, request):

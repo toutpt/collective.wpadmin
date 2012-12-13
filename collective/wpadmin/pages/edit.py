@@ -4,8 +4,8 @@ from collective.wpadmin.pages.page import Page, PloneActionModal
 class Posts(Page):
     """Dashboard page"""
     id = "edit"
-    title = u"Posts"
-    description = u"Manage your posts"
+    title = _(u"Posts")
+    description = _(u"Manage your posts")
     icon = "icon-folder-open"
 
     content_template_name = "edit.pt"
