@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.wpadmin\n"
-"POT-Creation-Date: 2012-12-13 11:03+0000\n"
+"POT-Creation-Date: 2012-12-13 15:16+0000\n"
 "PO-Revision-Date: 2006-01-29 23:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,6 +14,14 @@ msgstr ""
 "Preferred-Encodings: utf-8\n"
 "Domain: collective.wpadmin\n"
 
+#: ./i18n.py:8
+msgid "Add a new blog"
+msgstr ""
+
+#: ./i18n.py:7
+msgid "Add a new content"
+msgstr ""
+
 #: ./widgets/addbox.py:10
 msgid "Add box"
 msgstr "Ajout de contenu"
@@ -21,6 +29,10 @@ msgstr "Ajout de contenu"
 #: ./widgets/analytics.py:9
 msgid "Analytics"
 msgstr "Statistiques"
+
+#: ./settings.py:12
+msgid "Blog content type"
+msgstr ""
 
 #: ./widgets/quickpress.py:21
 msgid "Body"
@@ -43,9 +55,17 @@ msgstr "Page par défaut"
 msgid "Description"
 msgstr "Description"
 
+#: ./settings.py:16
+msgid "File content type"
+msgstr ""
+
 #: ./pages/dashboard.py:11
 msgid "Get all you need"
 msgstr "Tout ce dont vous avez besoin"
+
+#: ./settings.py:14
+msgid "Image content type"
+msgstr ""
 
 #: ./pages/editcomments.py:11
 msgid "Manage your comments"
@@ -55,7 +75,7 @@ msgstr "Gérer vos commentaires"
 msgid "Manage your medias"
 msgstr "Gérer vos médias"
 
-#: ./pages/edit.py:8
+#: ./pages/edit.py:11
 msgid "Manage your posts"
 msgstr "Gérer vos blogs"
 
@@ -67,7 +87,7 @@ msgstr "Gérer vos mots-clés"
 msgid "Media"
 msgstr "Média"
 
-#: ./pages/edit.py:7
+#: ./pages/edit.py:10
 msgid "Posts"
 msgstr "Blogs"
 

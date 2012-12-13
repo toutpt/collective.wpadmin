@@ -9,16 +9,9 @@
              value="typeupload=Image&mediaupload=image"/>
 </div>
 
-<a class="btn btn-primary" tal:attributes="href string:${view/site_url}/wp-admin-addboxmodal" data-target="#myModal" data-toggle="modal">Add a new content</a>
+<a class="btn btn-primary" tal:attributes="href string:${view/get_add_blog_url}" i18n:translate="">Add a new blog</a><br/>
+<!-- <a class="btn btn-primary" tal:attributes="href string:${view/site_url}/wp-admin-addboxmodal" data-target="#myModal" data-toggle="modal" i18n:translate="">Add a new content</a> -->
 
-<div class="dropdown" tal:replace="nothing">
- <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">Add new<b class="caret"></b></a>
- <ul class="content-types dropdown-menu" role="menu" aria-labelledby="dLabel">
-  <li tal:repeat="contenttype view/get_content_types">
-     <a tal:attributes="href string:${view/context/absolute_url}/createObject?type_name=${contenttype/id}" tal:content="contenttype/title">Add new blog</a>
-  </li>
- </ul>
-</div>
 <link tal:attributes="href string:${view/site_url}/++resource++quickupload_static/uploadify.css" rel="stylesheet">
 <link tal:attributes="href string:${view/site_url}/++resource++quickupload_static/fileuploader.css" rel="stylesheet">
 <script type="text/javascript" tal:attributes="src string:${view/site_url}/++resource++quickupload_static/swfobject.js"></script>

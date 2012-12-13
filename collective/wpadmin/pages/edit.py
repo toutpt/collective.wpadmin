@@ -1,4 +1,7 @@
 from collective.wpadmin.pages.page import Page, PloneActionModal
+from collective.wpadmin import i18n
+
+_ = i18n.messageFactory
 
 
 class Posts(Page):
@@ -12,7 +15,7 @@ class Posts(Page):
 
     def get_all_posts(self):
         query = self.get_query()
-        query['portal_type'] = ['News Item', 'Document', 'Event']
+        query['portal_type'] = self.settings['blog_type']
         return self.query_catalog(query)
 
 

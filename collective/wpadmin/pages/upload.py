@@ -15,8 +15,7 @@ class Media(Page):
 
     def get_all_media(self):
         query = self.get_query()
-        query['portal_type'] = ['File', 'Image']
+        media_types = [self.settings['image_type'],
+                       self.settings['file_type']]
+        query['portal_type'] = media_types
         return self.query_catalog(query)
-
-    def quickupload_url(self):
-        return '%s/media/@@quick_upload' % self.context.absolute_url()

@@ -33,6 +33,7 @@ setup(name='collective.wpadmin',
           'plone.api',
           'collective.js.datatables',
           'collective.quickupload',
+          'collective.configviews',
           # -*- Extra requirements: -*-
       ],
       extras_require = dict(

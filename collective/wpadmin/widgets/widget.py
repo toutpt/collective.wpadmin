@@ -32,7 +32,6 @@ class Widget(Core):
     content_template_name = ""
     title = u"Widget"
     description = u""
-    settings = None
 
     def __init__(self, page):
         Core.__init__(self, page.context, page.request)

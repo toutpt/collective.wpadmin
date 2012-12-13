@@ -1,26 +1,30 @@
 import logging
 
 from zope import component
+from zope import interface
+from zope import schema
+from zope.schema.interfaces import IVocabularyFactory
 from zope.publisher.interfaces.browser import IBrowserRequest
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.Five.browser import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
 
 from plone.app.customerize import registration
 from plone import api
 
-from Products.statusmessages.interfaces import IStatusMessage
-from zope.schema.interfaces import IVocabularyFactory
+from collective.configviews.api import ConfigurableBaseView
+from collective.wpadmin import i18n, settings
 
 logger = logging.getLogger('collective.wpadmin')
+_ = i18n.messageFactory
 
 
-class Core(BrowserView):
+class Core(ConfigurableBaseView):
     """Default implementation of IPage"""
     template_name = ""
+    settings_schema = settings.WPAdminSettings
 
     def __init__(self, context, request):
-        self.context = context
-        self.request = request
+        super(Core, self).__init__(context, request)
         self.cached_components = {}
         self.cached_tools = {}
 
@@ -82,3 +86,7 @@ class Core(BrowserView):
     def log(self, message, mtype="info"):
         log = getattr(logger, mtype)
         log(message)
+
+    def get_add_blog_url(self):
+        path = '/createObject?type_name=' + self.settings['blog_type']
+        return self.context.absolute_url() + path

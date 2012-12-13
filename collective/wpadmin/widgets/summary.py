@@ -17,7 +17,7 @@ class Summary(widget.Widget):
     def how_many_published_post(self):
         query = self.get_query()
         query['review_state'] = 'published'
-        query['portal_type'] = ['News Item', 'Event', 'Document']
+        query['portal_type'] = self.settings['blog_type']
         return len(self.query_catalog(query))
 
     def how_many_comments(self, state=None):
