@@ -27,3 +27,7 @@
 	max-width: 300px;
 	float: right;
 }
+.wpwidget-content-quickpress .text-widget,
+.wpwidget-content-quickpress .textarea-widget{
+    width: 400px;
+}

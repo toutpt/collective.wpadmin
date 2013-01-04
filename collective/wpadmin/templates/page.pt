@@ -89,7 +89,8 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $( ".wpwidget" ).accordion({
-         collapsible: true
+         collapsible: true,
+         autoHeight: false
     });
     $(".statusmessage-info").addClass("ui-state-highlight");
     $(".statusmessage-error").addClass("ui-state-error");

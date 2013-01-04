@@ -18,13 +18,9 @@ _ = i18n.messageFactory
 
 class IPressFormSchema(interface.Interface):
     """Press form schema"""
-    title = schema.TextLine(title=_(u"Title"),
-                            required=True)
-#    directives.widget(body='plone.app.z3cform.wysiwyg.WysiwygFieldWidget')
+    title = schema.TextLine(title=_(u"Title"),  required=True)
     body = schema.Text(title=_(u"Body"))
-    image = NamedImage(
-            title=_(u"Please upload an image"),
-            required=False)
+    image = NamedImage(title=_(u"Please upload an image"), required=False)
     tags = schema.TextLine(title=_(u"Tags"), required=False)
 
 
@@ -83,6 +79,12 @@ class PressForm(AutoExtensibleForm, form.Form):
     def next_url(self):
         #add status message
         self.request.response.redirect(self.parent_widget.page.get_url())
+
+    def updateWidgets(self):
+        super(PressForm, self).updateWidgets()
+        self.widgets['title'].size = 80
+        self.widgets['body'].rows = 5
+        self.widgets['tags'].size = 80
 
 
 class EmptyPressFormAdapter(object):
