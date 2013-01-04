@@ -11,5 +11,5 @@ class Dashboard(WidgetsContainer):
     description = _(u"Get all you need")
     icon = "icon-th-large"
 
-    left_widget_ids = ["summary", "recentcomments"]
+    left_widget_ids = ["summary", "draft", "recentcomments"]
     right_widget_ids = ["quickpress", "addbox"]

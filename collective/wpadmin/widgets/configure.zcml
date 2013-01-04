@@ -45,11 +45,19 @@
     for="collective.wpadmin.pages.page.IPage"
     />
 
+  <adapter
+    name="draft"
+    provides=".widget.IWidget"
+    factory=".draft.Draft"
+    for="collective.wpadmin.pages.page.IPage"
+    />
+
   <browser:page
     name="wp-admin-addboxmodal"
     for="*"
     class=".addbox.AddModal"
     permission="plone.app.controlpanel.Overview"
     />
+
 
 </configure>

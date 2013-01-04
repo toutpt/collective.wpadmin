@@ -22,7 +22,7 @@ class Summary(widget.Widget):
 
     def how_many_comments(self, state=None):
         query = self.get_query()
-        query['portal_type'] = 'Discussion'
+        query['portal_type'] = 'Discussion Item'
         if state:
             query['review_state'] = state
         return len(self.query_catalog(query))
