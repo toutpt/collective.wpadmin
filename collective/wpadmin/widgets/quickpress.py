@@ -8,8 +8,10 @@ from plone.autoform.form import AutoExtensibleForm
 from plone.namedfile.field import NamedImage
 from Products.statusmessages.interfaces import IStatusMessage
 
+
 from collective.wpadmin.widgets import widget
 from collective.wpadmin import i18n
+from Products.CMFCore.utils import getToolByName
 
 _ = i18n.messageFactory
 
@@ -23,7 +25,7 @@ class IPressFormSchema(interface.Interface):
     image = NamedImage(
             title=_(u"Please upload an image"),
             required=False)
-    tags = schema.TextLine(title=_(u"Tags"))
+    tags = schema.TextLine(title=_(u"Tags"), required=False)
 
 
 class PressForm(AutoExtensibleForm, form.Form):
@@ -59,12 +61,17 @@ class PressForm(AutoExtensibleForm, form.Form):
         post = api.content.create(type=self.post_type,
                                   title=data['title'],
                                   container=self.context)
-        post.setText(data['body'].encode('utf-8'))
-        tags = []
-        for rawtag in data['tags'].split(','):
-            tags.append(rawtag.strip())
-        if tags:
-            post.setSubject(tags)
+        text_rst = data['body'].encode('utf-8')
+        portal_transforms = getToolByName(self.context, 'portal_transforms')
+        text_html = portal_transforms.convertTo('text/html', text_rst,
+                                        mimetype='text/x-rst').getData()
+        post.setText(text_html, mimetype='text/html')
+        if data['tags']:
+            tags = []
+            for rawtag in data['tags'].split(','):
+                tags.append(rawtag.strip())
+            if tags:
+                post.setSubject(tags)
         status = IStatusMessage(self.request)
         status.add("Post created", "info")
         return post
