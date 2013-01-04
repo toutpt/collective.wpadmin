@@ -33,6 +33,14 @@ class Core(ConfigurableBaseView):
         return ViewPageTemplateFile('templates/%s' % self.template_name)
 
     def __call__(self):
+        if self.context.portal_type not in ('Plone Site', 'Folder'):
+            context_state = component.getMultiAdapter((self.context,
+                                                       self.request),
+                                                  name=u"plone_context_state")
+            if context_state.is_default_page():
+                url = self.context.aq_inner.aq_parent.absolute_url()
+                self.request.response.redirect(url + '/@@' + self.__name__)
+                return
         self.update()
         return self.index(self)
 
