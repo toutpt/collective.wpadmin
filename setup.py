@@ -34,6 +34,8 @@ setup(name='collective.wpadmin',
           'collective.js.datatables',
           'collective.quickupload',
           'collective.configviews',
+          'plone.namedfile',
+          'plone.formwidget.namedfile',
           # -*- Extra requirements: -*-
       ],
       extras_require = dict(

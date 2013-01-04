@@ -12,4 +12,4 @@ class Dashboard(WidgetsContainer):
     icon = "icon-th-large"
 
     left_widget_ids = ["summary", "recentcomments"]
-    right_widget_ids = ["addbox"]
+    right_widget_ids = ["quickpress", "addbox"]

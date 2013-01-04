@@ -3,11 +3,12 @@ from zope import interface
 from zope import schema
 from z3c.form import form, button
 
-from plone.autoform.form import AutoExtensibleForm
 from plone import api
+from plone.autoform.form import AutoExtensibleForm
+from plone.namedfile.field import NamedImage
+from Products.statusmessages.interfaces import IStatusMessage
 
 from collective.wpadmin.widgets import widget
-from Products.statusmessages.interfaces import IStatusMessage
 from collective.wpadmin import i18n
 
 _ = i18n.messageFactory
@@ -19,6 +20,9 @@ class IPressFormSchema(interface.Interface):
                             required=True)
 #    directives.widget(body='plone.app.z3cform.wysiwyg.WysiwygFieldWidget')
     body = schema.Text(title=_(u"Body"))
+    image = NamedImage(
+            title=_(u"Please upload an image"),
+            required=False)
     tags = schema.TextLine(title=_(u"Tags"))
 
 
