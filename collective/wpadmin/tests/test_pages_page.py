@@ -28,6 +28,23 @@ class UnitTestPage(base.UnitTestCase):
         self.assertEqual(self.view.title, u'Default page')
 
 
+class IntegrationTestPage(base.IntegrationTestCase):
+    def setUp(self):
+        super(IntegrationTestPage, self).setUp()
+        self.view = page.Page(self.folder, self.request)
+
+    def test_get_menu(self):
+        menu = self.view.get_menu()
+        for item in menu:
+            self.assertIn('id', item)
+            self.assertIn('title', item)
+            self.assertIn('icon', item)
+        menu_ids = [item['id'] for item in menu]
+        self.assertIn('edit', menu_ids)
+        self.assertIn('upload', menu_ids)
+        self.assertIn('dashboard', menu_ids)
+
+
 class UnitTestWidgetContainer(base.UnitTestCase):
     def setUp(self):
         self.context = utils.FakeContext()
