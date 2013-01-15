@@ -82,12 +82,22 @@ class Core(ConfigurableBaseView):
         return self.cached_components[cid]
 
     def get_views(self, interface=None):
-        if 'views' not in self.cached_components:
+        views = []
+        key = 'views'
+        if key not in self.cached_components:
             #http://developer.plone.org/views/browserviews.html
-            views = registration.getViews(IBrowserRequest)
-            self.cached_components['views'] = views
+            views = [view.factory for view in \
+                     registration.getViews(IBrowserRequest)]
+            self.cached_components[key] = views
 
-        return self.cached_components['views']
+        if interface is not None:
+            key = key + '.' + interface.__module__ + '.' + interface.__name__
+            if key not in self.cached_components:
+                views = [view for view in views \
+                         if interface.implementedBy(view)]
+                self.cached_components[key] = views
+
+        return self.cached_components[key]
 
     def get_messages(self):
         if 'statusmessage' not in self.cached_components:

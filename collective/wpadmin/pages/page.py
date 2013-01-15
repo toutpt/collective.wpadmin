@@ -50,10 +50,8 @@ class Page(Core):
 
     def get_menu(self):
         menu = []
-        #http://developer.plone.org/views/browserviews.html
-        views = registration.getViews(IBrowserRequest)
-        pages = [view.factory for view in views \
-                 if IPage.implementedBy(view.factory)]
+        views = self.get_views(interface=IPage)
+        pages = [view for view in views]
 
         for page in pages:
             menu_info = {'id': page.id,
