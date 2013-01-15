@@ -47,7 +47,7 @@ class IntegrationTestCoreView(base.IntegrationTestCase):
         self.setRole('Manager')
         self.view = self.folder.restrictedTraverse('wp-admin-dashboard')
 
-    def test_cached_component(self):
+    def test_cached_components(self):
         computed = self.view.get_views()
         cached = self.cached_components['views']
         self.assertEqual(computed, cached)
@@ -58,8 +58,14 @@ class IntegrationTestCoreView(base.IntegrationTestCase):
 
         name = "plone.app.vocabularies.ReallyUserFriendlyTypes"
         computed = self.view.get_vocabulary(name)
-        cached = self.cached_components['vocabulary_%s' % name]
+        cached = self.view.cached_components['vocabulary_%s' % name]
         self.assertEqual(computed, cached)
+
+    def test_cached_tools(self):
+        computed = self.view.get_tool('portal_catalog')
+        cached = self.view.cached_tools['portal_catalog']
+        self.assertEqual(computed, cached)
+
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
