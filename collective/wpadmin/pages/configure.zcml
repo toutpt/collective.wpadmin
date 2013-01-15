@@ -37,13 +37,7 @@
     permission="plone.app.controlpanel.Overview"
     />
 
-  <!-- wrap different plone actions -->
-<!--   <browser:page -->
-<!--     name="wp-admin-delete_confirmation" -->
-<!--     for="*" -->
-<!--     class=".edit.DeleteConfirmation" -->
-<!--     permission="plone.app.controlpanel.Overview" -->
-<!--     /> -->
+  <!-- rewrite plone actions -->
   <browser:page
     name="wp-admin-delete_confirmation"
     for="*"
@@ -53,15 +47,17 @@
   <browser:page
     name="wp-admin-rename"
     for="*"
-    class=".edit.Rename"
+    class=".edit.RenameFormView"
     permission="plone.app.controlpanel.Overview"
     />
+  <adapter factory=".edit.RenameFormAdapter"/>
   <browser:page
     name="wp-admin-base-edit"
     for="*"
-    class=".edit.BaseEdit"
+    class=".edit.TextEditFormView"
     permission="plone.app.controlpanel.Overview"
     />
+  <adapter factory=".edit.TextEditFormAdapter"/>
 
   <!-- TODO
 

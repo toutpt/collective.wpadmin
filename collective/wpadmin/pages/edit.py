@@ -1,5 +1,7 @@
 from Acquisition import aq_inner
+from zope import component
 from zope import interface
+from zope import schema
 from z3c.form import form, button
 from z3c.form.interfaces import ISubForm, IFormLayer
 from Products.Five.browser import BrowserView
@@ -13,6 +15,7 @@ from plone.z3cform import z2
 from collective.wpadmin.pages.page import Page, PloneActionModal
 from collective.wpadmin import i18n
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.Archetypes.interfaces.base import IBaseContent
 
 _ = i18n.messageFactory
 
@@ -30,15 +33,6 @@ class Posts(Page):
         query = self.get_query()
         query['portal_type'] = self.settings['blog_type']
         return self.query_catalog(query)
-
-
-class BaseEdit(PloneActionModal):
-    action = "base_edit"
-    ajax_load = False
-
-
-class Rename(PloneActionModal):
-    action = "object_rename"
 
 
 class WPDeleteForm(AutoExtensibleForm, form.Form):
@@ -98,3 +92,115 @@ class WPDeleteFormView(BrowserView):
         self.update()
         return self.index()
 
+
+class RenameFormSchema(interface.Interface):
+    name = schema.ASCIILine(title=_(u"New ID"),
+                            description=_(u"ID is the URL chunk"))
+    title = schema.TextLine(title=_(u"New title"))
+
+
+class RenameFormAdapter(object):
+    interface.implements(RenameFormSchema)
+    component.adapts(IBaseContent)
+
+    def __init__(self, context):
+        self.context = context
+
+    @property
+    def name(self):
+        return self.context.getId()
+
+    @property
+    def title(self):
+        return self.context.Title().decode('utf-8')
+
+
+class RenameForm(AutoExtensibleForm, form.Form):
+    schema = RenameFormSchema
+
+    @button.buttonAndHandler(_(u"Rename"))
+    def action_rename(self, action):
+        self.next_url()
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            for error in errors:
+                IStatusMessage(self.request).add(error.message, "error")
+            return False
+        self.do_rename(data)
+
+    def do_rename(self, data):
+        if self.context.getId() != data['name']:
+            api.content.rename(obj=self.context,
+                               new_id=data['name'],
+                               safe_id=True)
+        title = data['title'].encode('utf-8')
+        if self.context.Title() != title:
+            self.context.setTitle(title)
+
+    def next_url(self):
+        url = self.request['HTTP_REFERER']
+        self.request.response.redirect(url)
+
+
+class RenameFormView(WPDeleteFormView):
+    form = RenameForm
+    description = u""
+
+    @property
+    def title(self):
+        return u"Rename %s" % self.context.Title()
+
+
+class TextEditFormSchema(interface.Interface):
+    text = schema.Text(title=_(u"Text"))
+
+
+class TextEditFormAdapter(object):
+    component.adapts(IBaseContent)
+    interface.implements(TextEditFormSchema)
+
+    def __init__(self, context):
+        self.context = context
+
+    @property
+    def text(self):
+        field = self.context.getField('text')
+        if field:
+            return field.get(self.context).decode('utf-8')
+
+
+class TextEditForm(AutoExtensibleForm, form.Form):
+    schema = TextEditFormSchema
+
+    @button.buttonAndHandler(_(u"Save"))
+    def action_save(self, action):
+        self.next_url()
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            for error in errors:
+                IStatusMessage(self.request).add(error.message, "error")
+            return False
+        self.do_save(data)
+
+    def do_save(self, data):
+        field = self.context.getField('text')
+        if field:
+            new_text = data['text'].decode('utf-8')
+            text = field.get(self.context)
+            if text != new_text:
+                field.set(self.context, new_text)
+
+    def next_url(self):
+        url = self.request['HTTP_REFERER']
+        self.request.response.redirect(url)
+
+
+class TextEditFormView(WPDeleteFormView):
+    form = TextEditForm
+    description = u""
+
+    @property
+    def title(self):
+        return u"Edit %s" % self.context.Title()

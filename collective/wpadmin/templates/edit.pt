@@ -16,8 +16,8 @@
           <td tal:content="python:', '.join(post.Subject)"></td>
           <td></td>
           <td>
-            <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-base-edit" data-target="#ploneModal" data-toggle="modal">edit</a>
-            <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-rename" data-target="#ploneModal" data-toggle="modal">rename</a>
+            <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-base-edit" data-target="#wpModal" data-toggle="modal">edit</a>
+            <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-rename" data-target="#wpModal" data-toggle="modal">rename</a>
             <a class="btn btn-danger" tal:attributes="href string:${post/getURL}/wp-admin-delete_confirmation" data-target="#wpModal" data-toggle="modal">delete</a>
           </td>
         </tr>
