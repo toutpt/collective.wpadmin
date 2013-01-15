@@ -1,8 +1,6 @@
 import logging
 
 from zope import component
-from zope import interface
-from zope import schema
 from zope.schema.interfaces import IVocabularyFactory
 from zope.publisher.interfaces.browser import IBrowserRequest
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -11,8 +9,8 @@ from Products.statusmessages.interfaces import IStatusMessage
 from plone.app.customerize import registration
 from plone import api
 
-from collective.configviews.api import ConfigurableBaseView
 from collective.wpadmin import i18n, settings
+from collective.configviews import ConfigurableBaseView
 
 logger = logging.getLogger('collective.wpadmin')
 _ = i18n.messageFactory
