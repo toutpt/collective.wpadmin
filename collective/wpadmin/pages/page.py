@@ -27,14 +27,16 @@ class IPage(interface.Interface):
 class Page(Core):
     """Default implementation of IPage"""
     interface.implements(IPage)
-    template_name = "page.pt"
-    content_template_name = ""
+
+    id = "page"
     title = _(u"Default page")
     description = u""
 
+    template_name = "page.pt"
+    content_template_name = ""
+
     def __init__(self, context, request):
         Core.__init__(self, context, request)
-        self.all_widgets = {}
 
     def update(self):
         Core.update(self)
@@ -76,6 +78,7 @@ class WidgetsContainer(Page):
 
     def __init__(self, context, request):
         super(WidgetsContainer, self).__init__(context, request)
+        self.all_widgets = {}
         self.left_widgets = []
         self.right_widgets = []
 
