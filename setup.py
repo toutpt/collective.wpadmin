@@ -38,7 +38,7 @@ setup(name='collective.wpadmin',
           'plone.formwidget.namedfile',
           # -*- Extra requirements: -*-
       ],
-      extras_require = dict(
+      extras_require=dict(
           tests=['plone.app.testing'],
       ),
       entry_points="""

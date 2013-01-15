@@ -11,4 +11,3 @@ class Comments(Page):
     description = _(u"Manage your comments")
 
     content_template_name = "editcomments.pt"
-
