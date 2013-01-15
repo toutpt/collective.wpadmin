@@ -10,7 +10,7 @@
 </div>
 
 <a class="btn btn-primary" tal:attributes="href string:${view/get_add_blog_url}" i18n:translate="">Add a new blog</a><br/>
-<!-- <a class="btn btn-primary" tal:attributes="href string:${view/site_url}/wp-admin-addboxmodal" data-target="#myModal" data-toggle="modal" i18n:translate="">Add a new content</a> -->
+<!-- <a class="btn btn-primary" tal:attributes="href string:${view/site_url}/wp-admin-addboxmodal" data-target="#ploneModal" data-toggle="modal" i18n:translate="">Add a new content</a> -->
 
 <link tal:attributes="href string:${view/site_url}/++resource++quickupload_static/uploadify.css" rel="stylesheet">
 <link tal:attributes="href string:${view/site_url}/++resource++quickupload_static/fileuploader.css" rel="stylesheet">

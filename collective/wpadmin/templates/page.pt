@@ -78,7 +78,7 @@
     <div class="row" tal:content="structure view/contents">
     </div>
 <!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="ploneModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="ploneModalLabel" aria-hidden="true">
   <div class="modal-body">
     <p>Loading, please wait</p>
   </div>
@@ -100,12 +100,12 @@ $(document).ready(function() {
             "sUrl": "@@collective.js.datatables.translation"
         }
     } );
-    $('#myModal').on('shown', function () {
-      var modal_content = $('#myModal #content').html();
-      $('#myModal .modal-body').html(modal_content);
-      $('#myModal form ul.formTabs').remove();
+    $('#ploneModal').on('shown', function () {
+      var modal_content = $('#ploneModal #content').html();
+      $('#ploneModal .modal-body').html(modal_content);
+      $('#ploneModal form ul.formTabs').remove();
     });
-    $('#myModal').on('hidden', function () {
+    $('#ploneModal').on('hidden', function () {
         window.location.reload();
     })
 

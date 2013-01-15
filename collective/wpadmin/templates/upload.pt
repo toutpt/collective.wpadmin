@@ -11,16 +11,16 @@
     <tbody>
         <tr tal:repeat="post view/get_all_media">
           <td>
-            <a tal:attributes="href string:${post/getURL}/image_view_fullscreen" tal:content="post/Title" data-target="#myModal" data-toggle="modal">Launch demo modal</a>
+            <a tal:attributes="href string:${post/getURL}/image_view_fullscreen" tal:content="post/Title" data-target="#ploneModal" data-toggle="modal">Launch demo modal</a>
           </td>
           <td tal:content="post/Creator"></td>
           <td>
               <img class="img-rounded" tal:condition="python:post.portal_type=='Image'" tal:attributes="src string:${post/getURL}/image_thumb"/>
           </td>
           <td>
-            <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-base-edit" data-target="#myModal" data-toggle="modal">edit</a>
-            <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-rename" data-target="#myModal" data-toggle="modal">rename</a>
-            <a class="btn btn-danger" tal:attributes="href string:${post/getURL}/wp-admin-delete_confirmation" data-target="#myModal" data-toggle="modal">delete</a>
+            <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-base-edit" data-target="#ploneModal" data-toggle="modal">edit</a>
+            <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-rename" data-target="#ploneModal" data-toggle="modal">rename</a>
+            <a class="btn btn-danger" tal:attributes="href string:${post/getURL}/wp-admin-delete_confirmation" data-target="#ploneModal" data-toggle="modal">delete</a>
           </td>
         </tr>
      </tbody>
