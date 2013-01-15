@@ -56,6 +56,10 @@ class IntegrationTestCoreView(base.IntegrationTestCase):
         cached = self.cached_components['plone_portal_state']
         self.assertEqual(computed, cached)
 
+        name = "plone.app.vocabularies.ReallyUserFriendlyTypes"
+        computed = self.view.get_vocabulary(name)
+        cached = self.cached_components['vocabulary_%s' % name]
+        self.assertEqual(computed, cached)
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
