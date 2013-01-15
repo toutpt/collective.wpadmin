@@ -38,10 +38,16 @@
     />
 
   <!-- wrap different plone actions -->
+<!--   <browser:page -->
+<!--     name="wp-admin-delete_confirmation" -->
+<!--     for="*" -->
+<!--     class=".edit.DeleteConfirmation" -->
+<!--     permission="plone.app.controlpanel.Overview" -->
+<!--     /> -->
   <browser:page
     name="wp-admin-delete_confirmation"
     for="*"
-    class=".edit.DeleteConfirmation"
+    class=".edit.WPDeleteFormView"
     permission="plone.app.controlpanel.Overview"
     />
   <browser:page
