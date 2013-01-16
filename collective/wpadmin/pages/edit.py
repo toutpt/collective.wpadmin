@@ -4,18 +4,19 @@ from zope import interface
 from zope import schema
 from z3c.form import form, button
 from z3c.form.interfaces import ISubForm, IFormLayer
+from Products.Archetypes.interfaces.base import IBaseContent
 from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
 
 from plone import api
 from plone.autoform.form import AutoExtensibleForm
+from plone.autoform.interfaces import WIDGETS_KEY
 from plone.z3cform.interfaces import IWrappedForm
 from plone.z3cform import z2
 
 from collective.wpadmin.pages.page import Page, PloneActionModal
 from collective.wpadmin import i18n
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.Archetypes.interfaces.base import IBaseContent
 
 _ = i18n.messageFactory
 
@@ -154,6 +155,9 @@ class RenameFormView(WPDeleteFormView):
 
 class TextEditFormSchema(interface.Interface):
     text = schema.Text(title=_(u"Text"))
+
+wysiwyg_widget = "plone.app.z3cform.wysiwyg.widget.WysiwygWidget"
+TextEditFormSchema.setTaggedValue(WIDGETS_KEY, {"text", wysiwyg_widget})
 
 
 class TextEditFormAdapter(object):

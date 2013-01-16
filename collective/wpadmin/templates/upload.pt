@@ -1,11 +1,11 @@
-<div class="span12">
+<div class="span12" i18n:domain="collective.wpadmin">
 <table class="datatable">
     <thead>
         <tr>
-            <th>title</th>
-            <th>author</th>
-            <th>preview</th>
-            <th>edit</th>
+            <th i18n:translate="">title</th>
+            <th i18n:translate="">author</th>
+            <th i18n:translate="">preview</th>
+            <th i18n:translate="">edit</th>
         </tr>
     </thead>
     <tbody>
@@ -18,9 +18,9 @@
               <img class="img-rounded" tal:condition="python:post.portal_type=='Image'" tal:attributes="src string:${post/getURL}/image_thumb"/>
           </td>
           <td>
-            <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-base-edit" data-target="#ploneModal" data-toggle="modal">edit</a>
-            <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-rename" data-target="#ploneModal" data-toggle="modal">rename</a>
-            <a class="btn btn-danger" tal:attributes="href string:${post/getURL}/wp-admin-delete_confirmation" data-target="#ploneModal" data-toggle="modal">delete</a>
+            <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-base-edit" data-target="#ploneModal" data-toggle="modal" i18n:translate="">edit</a>
+            <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-rename" data-target="#wpModal" data-toggle="modal" i18n:translate="">rename</a>
+            <a class="btn btn-danger" tal:attributes="href string:${post/getURL}/wp-admin-delete_confirmation" data-target="#wpModal" data-toggle="modal" i18n:translate="">delete</a>
           </td>
         </tr>
      </tbody>

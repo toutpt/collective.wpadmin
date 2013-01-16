@@ -1,4 +1,4 @@
-<tal:def tal:define="comments view/get_comments">
+<tal:def tal:define="comments view/get_comments" i18n:domain="collective.wpadmin">
  <div tal:condition="comments">
   <div tal:repeat="comment comments">
     <tal:state tal:condition="python:comment.review_state=='published'">

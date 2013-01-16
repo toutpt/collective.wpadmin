@@ -1,4 +1,4 @@
-<div class="row-fluid">
+<div class="row-fluid" i18n:domain="collective.wpadmin">
   <div class="span3 summary-content">
     <h3>Content</h3>
     <p><a tal:attributes="href string:${view/context/absolute_url}/wp-admin-edit"><span class="badge badge-success"><tal:nb tal:content="view/how_many_published_post"></tal:nb>&nbsp;<tal:label i18n:translate="">Published post</tal:label></span></a></p>

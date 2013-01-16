@@ -1,4 +1,4 @@
-<tal:def tal:define="drafts view/get_drafts">
+<tal:def tal:define="drafts view/get_drafts" i18n:domain="collective.wpadmin">
  <ul tal:condition="drafts">
   <li tal:repeat="draft drafts">
     <span class="badge badge-warning"><a tal:attributes="href draft/getURL" tal:content="draft/Title"></a></span>
