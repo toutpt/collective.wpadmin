@@ -67,13 +67,11 @@ access to the Plone edit form.
 Technical specification
 =======================
 
-Do not interfer with Plone profile, this addon is a Zope user interface to
-manage Plone content.
+This addon do not has setup for Plone. You can just add it to the buildout
+and hit /wp-admin where you want.
 
-WPAdmin page /wp-admin
-----------------------
-
-It is the default page, it loads by default the dashboard.
+If you are looking for further integration you should check the addon
+`cirb.blog <https://github.com/CIRB/cirb.blog>`
 
 
 Credits
