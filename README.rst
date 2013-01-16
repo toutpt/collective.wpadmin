@@ -13,6 +13,12 @@ How to install
 You can install this addon as any other Plone addons. Please follow the
 offical documentation_.
 
+This addon do not has setup for Plone. You can just add it to the buildout
+and hit /wp-admin where you want.
+
+If you are looking for further integration you should check the addon
+`cirb.blog <https://github.com/CIRB/cirb.blog>`
+
 Features
 ========
 
@@ -62,16 +68,6 @@ Blogs page
 This page let you browse current blog posts and manage them. You can rename,
 delete any posts from this page without going to Plone. You also has a direct
 access to the Plone edit form.
-
-
-Technical specification
-=======================
-
-This addon do not has setup for Plone. You can just add it to the buildout
-and hit /wp-admin where you want.
-
-If you are looking for further integration you should check the addon
-`cirb.blog <https://github.com/CIRB/cirb.blog>`
 
 
 Credits
