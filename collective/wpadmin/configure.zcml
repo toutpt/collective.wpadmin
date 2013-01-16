@@ -10,6 +10,7 @@
 
   <i18n:registerTranslations directory="locales" />
   <include package="plone.app.controlpanel" file="permissions.zcml"/>
+  <include package="plone.namedfile" />
   <include package=".widgets"/>
   <include package=".pages"/>
   <browser:resourceDirectory

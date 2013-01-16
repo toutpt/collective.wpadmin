@@ -12,11 +12,14 @@ from Products.statusmessages.interfaces import IStatusMessage
 from plone import api
 from plone.autoform.form import AutoExtensibleForm
 from plone.autoform.interfaces import WIDGETS_KEY
+from plone.namedfile.field import NamedBlobImage
 from plone.z3cform.interfaces import IWrappedForm
 from plone.z3cform import z2
 
 from collective.wpadmin.pages.page import Page, PloneActionModal
 from collective.wpadmin import i18n
+from Products.ATContentTypes.interfaces.image import IATImage
+from Products.ATContentTypes.interfaces.news import IATNewsItem
 
 _ = i18n.messageFactory
 
@@ -153,16 +156,16 @@ class RenameFormView(WPDeleteFormView):
         return u"Rename %s" % self.context.Title()
 
 
-class TextEditFormSchema(interface.Interface):
+class NewsItemEditFormSchema(interface.Interface):
     text = schema.Text(title=_(u"Text"))
 
 wysiwyg_widget = "plone.app.z3cform.wysiwyg.widget.WysiwygWidget"
-TextEditFormSchema.setTaggedValue(WIDGETS_KEY, {"text", wysiwyg_widget})
+NewsItemEditFormSchema.setTaggedValue(WIDGETS_KEY, {"text", wysiwyg_widget})
 
 
-class TextEditFormAdapter(object):
-    component.adapts(IBaseContent)
-    interface.implements(TextEditFormSchema)
+class NewsItemEditFormAdapter(object):
+    component.adapts(IATNewsItem)
+    interface.implements(NewsItemEditFormSchema)
 
     def __init__(self, context):
         self.context = context
@@ -174,8 +177,8 @@ class TextEditFormAdapter(object):
             return field.get(self.context).decode('utf-8')
 
 
-class TextEditForm(AutoExtensibleForm, form.Form):
-    schema = TextEditFormSchema
+class NewsItemEditForm(AutoExtensibleForm, form.Form):
+    schema = NewsItemEditFormSchema
 
     @button.buttonAndHandler(_(u"Save"))
     def action_save(self, action):
@@ -201,8 +204,61 @@ class TextEditForm(AutoExtensibleForm, form.Form):
         self.request.response.redirect(url)
 
 
-class TextEditFormView(WPDeleteFormView):
-    form = TextEditForm
+class NewsItemEditFormView(WPDeleteFormView):
+    form = NewsItemEditForm
+    description = u""
+
+    @property
+    def title(self):
+        return u"Edit %s" % self.context.Title()
+
+
+class ImageEditFormSchema(interface.Interface):
+
+    image = NamedBlobImage(title=_(u"Please upload an image"),
+                     required=False)
+
+
+class ImageEditFormAdapter(object):
+    component.adapts(IATImage)
+    interface.implements(ImageEditFormSchema)
+
+    def __init__(self, context):
+        self.context = context
+        self.image = None
+
+
+class ImageEditForm(AutoExtensibleForm, form.Form):
+    schema = ImageEditFormSchema
+
+    @button.buttonAndHandler(_(u"save"))
+    def action_save(self, action):
+        self.next_url()
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            for error in errors:
+                IStatusMessage(self.request).add(error.message, "error")
+            return False
+        self.update_file(data)
+
+    @button.buttonAndHandler(_(u"cancel"))
+    def action_cancel(self, action):
+        self.next_url()
+
+    def update_file(self, data):
+        image = data['image']
+        field = self.context.getField('image')
+        import pdb;pdb.set_trace()
+        field.set(self.context, image)
+
+    def next_url(self):
+        url = self.request['HTTP_REFERER']
+        self.request.response.redirect(url)
+
+
+class ImageEditFormView(WPDeleteFormView):
+    form = ImageEditForm
     description = u""
 
     @property

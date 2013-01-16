@@ -18,7 +18,7 @@
               <img class="img-rounded" tal:condition="python:post.portal_type=='Image'" tal:attributes="src string:${post/getURL}/image_thumb"/>
           </td>
           <td>
-            <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-base-edit" data-target="#ploneModal" data-toggle="modal" i18n:translate="">edit</a>
+            <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-base-edit" data-target="#wpModal" data-toggle="modal" i18n:translate="">edit</a>
             <a class="btn" tal:attributes="href string:${post/getURL}/wp-admin-rename" data-target="#wpModal" data-toggle="modal" i18n:translate="">rename</a>
             <a class="btn btn-danger" tal:attributes="href string:${post/getURL}/wp-admin-delete_confirmation" data-target="#wpModal" data-toggle="modal" i18n:translate="">delete</a>
           </td>

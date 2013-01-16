@@ -53,11 +53,18 @@
   <adapter factory=".edit.RenameFormAdapter"/>
   <browser:page
     name="wp-admin-base-edit"
-    for="*"
-    class=".edit.TextEditFormView"
+    for="Products.ATContentTypes.interfaces.news.IATNewsItem"
+    class=".edit.NewsItemEditFormView"
     permission="plone.app.controlpanel.Overview"
     />
-  <adapter factory=".edit.TextEditFormAdapter"/>
+  <adapter factory=".edit.NewsItemEditFormAdapter"/>
+  <browser:page
+    name="wp-admin-base-edit"
+    for="Products.ATContentTypes.interfaces.image.IATImage"
+    class=".edit.ImageEditFormView"
+    permission="plone.app.controlpanel.Overview"
+    />
+  <adapter factory=".edit.ImageEditFormAdapter"/>
 
   <!-- TODO
 
