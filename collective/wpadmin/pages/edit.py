@@ -156,11 +156,15 @@ class RenameFormView(WPDeleteFormView):
         return u"Rename %s" % self.context.Title()
 
 
-class NewsItemEditFormSchema(interface.Interface):
-    text = schema.Text(title=_(u"Text"))
+from plone.autoform import directives
+from plone.supermodel import model
+from plone.app.z3cform.wysiwyg import WysiwygFieldWidget
+#wysiwyg_widget = "plone.app.z3cform.wysiwyg.widget.WysiwygWidget"
 
-wysiwyg_widget = "plone.app.z3cform.wysiwyg.widget.WysiwygWidget"
-NewsItemEditFormSchema.setTaggedValue(WIDGETS_KEY, {"text", wysiwyg_widget})
+
+class NewsItemEditFormSchema(model.Schema):
+    directives.widget(text=WysiwygFieldWidget)
+    text = schema.Text(title=_(u"Text"))
 
 
 class NewsItemEditFormAdapter(object):
@@ -215,8 +219,7 @@ class NewsItemEditFormView(WPDeleteFormView):
 
 class ImageEditFormSchema(interface.Interface):
 
-    image = NamedBlobImage(title=_(u"Please upload an image"),
-                     required=False)
+    image = NamedBlobImage(title=_(u"Please upload an image"))
 
 
 class ImageEditFormAdapter(object):
@@ -242,14 +245,9 @@ class ImageEditForm(AutoExtensibleForm, form.Form):
             return False
         self.update_file(data)
 
-    @button.buttonAndHandler(_(u"cancel"))
-    def action_cancel(self, action):
-        self.next_url()
-
     def update_file(self, data):
-        image = data['image']
+        image = data['image'].data
         field = self.context.getField('image')
-        import pdb;pdb.set_trace()
         field.set(self.context, image)
 
     def next_url(self):
