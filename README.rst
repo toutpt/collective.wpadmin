@@ -21,27 +21,32 @@ Dashboard page
 
 This page display many widgets that let you see what's up in your blog.
 
-summary:
+summary
+~~~~~~~
 
 * total number of published blog posts
 * total number of comments
 * last drafts
 
-quickpress:
+quickpress
+~~~~~~~~~~
 
 You can add a news item very quickly (title, body, tags and image)
 
-add box:
+add box
+~~~~~~~
 
 Big blue button to add a new news item (using the Plone add form) plus a
 quickupload form to upload images to media folder.
 
-draft:
+draft
+~~~~~
 
 this widget give you a direct access into Plone to your current blog posts into
 draft state.
 
-recent comment:
+recent comment
+~~~~~~~~~~~~~~
 
 this widget give you a direct access into Plone to last comment
 
