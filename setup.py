@@ -28,7 +28,6 @@ setup(name='collective.wpadmin',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'collective.googleanalytics',
           'collective.js.jqueryui',
           'plone.api',
           'collective.js.datatables',

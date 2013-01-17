@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.wpadmin\n"
-"POT-Creation-Date: 2013-01-16 10:54+0000\n"
+"POT-Creation-Date: 2013-01-17 07:54+0000\n"
 "PO-Revision-Date: 2006-01-29 23:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,10 +25,6 @@ msgstr "Ajouter un nouveau post"
 #: ./widgets/addbox.py:10
 msgid "Add box"
 msgstr "Ajout de contenu"
-
-#: ./widgets/analytics.py:9
-msgid "Analytics"
-msgstr "Statistiques"
 
 #: ./templates/summary.pt:10
 msgid "Approved"
@@ -72,7 +68,7 @@ msgstr "Type de contenu fichier"
 msgid "Get all you need"
 msgstr "Tout ce dont vous avez besoin"
 
-#: ./pages/edit.py:99
+#: ./pages/edit.py:102
 msgid "ID is the URL chunk"
 msgstr "L'ID est la partie de l'URL"
 
@@ -88,7 +84,7 @@ msgstr "Gérer vos commentaires"
 msgid "Manage your medias"
 msgstr "Gérer vos médias"
 
-#: ./pages/edit.py:28
+#: ./pages/edit.py:31
 msgid "Manage your posts"
 msgstr "Gérer vos blogs"
 
@@ -100,11 +96,11 @@ msgstr "Gérer vos mots-clés"
 msgid "Media"
 msgstr "Média"
 
-#: ./pages/edit.py:98
+#: ./pages/edit.py:101
 msgid "New ID"
 msgstr "Nouvel ID"
 
-#: ./pages/edit.py:100
+#: ./pages/edit.py:103
 msgid "New title"
 msgstr "Nouveau titre"
 
@@ -120,11 +116,12 @@ msgstr "Aucun brouillon"
 msgid "Pending"
 msgstr "En attente"
 
+#: ./pages/edit.py:222
 #: ./widgets/quickpress.py:23
 msgid "Please upload an image"
 msgstr "Télécharger (up) une image"
 
-#: ./pages/edit.py:27
+#: ./pages/edit.py:30
 msgid "Posts"
 msgstr "Blogs"
 
@@ -140,11 +137,11 @@ msgstr "Blog rapide"
 msgid "Recent comments"
 msgstr "Commentaires récents"
 
-#: ./pages/edit.py:122
+#: ./pages/edit.py:125
 msgid "Rename"
 msgstr "Renommer"
 
-#: ./pages/edit.py:180
+#: ./pages/edit.py:187
 msgid "Save"
 msgstr "Enregistrer"
 
@@ -162,7 +159,7 @@ msgstr "Résumé"
 msgid "Tags"
 msgstr "Mots-clés"
 
-#: ./pages/edit.py:157
+#: ./pages/edit.py:167
 msgid "Text"
 msgstr "Texte"
 
@@ -185,7 +182,7 @@ msgstr "actions"
 msgid "author"
 msgstr "auteur"
 
-#: ./pages/edit.py:48
+#: ./pages/edit.py:51
 msgid "cancel"
 msgstr "Annuler"
 
@@ -193,7 +190,7 @@ msgstr "Annuler"
 msgid "categories"
 msgstr "catégories"
 
-#: ./pages/edit.py:43
+#: ./pages/edit.py:46
 #: ./templates/edit.pt:21
 #: ./templates/upload.pt:23
 msgid "delete"
@@ -221,6 +218,7 @@ msgstr "renommer"
 msgid "reset"
 msgstr "annuler"
 
+#: ./pages/edit.py:237
 #: ./widgets/quickpress.py:34
 msgid "save"
 msgstr "sauvegarder"

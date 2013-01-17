@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-01-16 10:54+0000\n"
+"POT-Creation-Date: 2013-01-17 07:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,10 +27,6 @@ msgstr ""
 
 #: ./widgets/addbox.py:10
 msgid "Add box"
-msgstr ""
-
-#: ./widgets/analytics.py:9
-msgid "Analytics"
 msgstr ""
 
 #: ./templates/summary.pt:10
@@ -75,7 +71,7 @@ msgstr ""
 msgid "Get all you need"
 msgstr ""
 
-#: ./pages/edit.py:99
+#: ./pages/edit.py:102
 msgid "ID is the URL chunk"
 msgstr ""
 
@@ -91,7 +87,7 @@ msgstr ""
 msgid "Manage your medias"
 msgstr ""
 
-#: ./pages/edit.py:28
+#: ./pages/edit.py:31
 msgid "Manage your posts"
 msgstr ""
 
@@ -103,11 +99,11 @@ msgstr ""
 msgid "Media"
 msgstr ""
 
-#: ./pages/edit.py:98
+#: ./pages/edit.py:101
 msgid "New ID"
 msgstr ""
 
-#: ./pages/edit.py:100
+#: ./pages/edit.py:103
 msgid "New title"
 msgstr ""
 
@@ -123,11 +119,12 @@ msgstr ""
 msgid "Pending"
 msgstr ""
 
+#: ./pages/edit.py:222
 #: ./widgets/quickpress.py:23
 msgid "Please upload an image"
 msgstr ""
 
-#: ./pages/edit.py:27
+#: ./pages/edit.py:30
 msgid "Posts"
 msgstr ""
 
@@ -143,11 +140,11 @@ msgstr ""
 msgid "Recent comments"
 msgstr ""
 
-#: ./pages/edit.py:122
+#: ./pages/edit.py:125
 msgid "Rename"
 msgstr ""
 
-#: ./pages/edit.py:180
+#: ./pages/edit.py:187
 msgid "Save"
 msgstr ""
 
@@ -165,7 +162,7 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
-#: ./pages/edit.py:157
+#: ./pages/edit.py:167
 msgid "Text"
 msgstr ""
 
@@ -188,7 +185,7 @@ msgstr ""
 msgid "author"
 msgstr ""
 
-#: ./pages/edit.py:48
+#: ./pages/edit.py:51
 msgid "cancel"
 msgstr ""
 
@@ -196,7 +193,7 @@ msgstr ""
 msgid "categories"
 msgstr ""
 
-#: ./pages/edit.py:43
+#: ./pages/edit.py:46
 #: ./templates/edit.pt:21
 #: ./templates/upload.pt:23
 msgid "delete"
@@ -224,6 +221,7 @@ msgstr ""
 msgid "reset"
 msgstr ""
 
+#: ./pages/edit.py:237
 #: ./widgets/quickpress.py:34
 msgid "save"
 msgstr ""

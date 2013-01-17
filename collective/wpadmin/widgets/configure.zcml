@@ -9,13 +9,6 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="collective.wpadmin">
 
-  <adapter zcml:condition="installed collective.googleanalytics"
-    name="analytics"
-    provides=".widget.IWidget"
-    factory=".analytics.Analytics"
-    for="collective.wpadmin.pages.page.IPage"
-    />
-
   <adapter
     name="quickpress"
     provides=".widget.IWidget"
