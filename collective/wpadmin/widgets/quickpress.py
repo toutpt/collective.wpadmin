@@ -12,6 +12,7 @@ from Products.statusmessages.interfaces import IStatusMessage
 from collective.wpadmin.widgets import widget
 from collective.wpadmin import i18n
 from Products.CMFCore.utils import getToolByName
+from plone.registry.interfaces import IRegistry
 
 _ = i18n.messageFactory
 
@@ -52,9 +53,10 @@ class PressForm(AutoExtensibleForm, form.Form):
         self.publish_post(post)
 
     def create_post(self, data):
-        if not hasattr(self, 'post_type'):
-            self.post_type = 'News Item'
-        post = api.content.create(type=self.post_type,
+        registry = component.getUtility(IRegistry)
+        key = 'collective.wpadmin.settings.WPAdminSettings.blog_type'
+        post_type = registry.get(key, 'News Item')
+        post = api.content.create(type=post_type,
                                   title=data['title'],
                                   container=self.context)
         text_rst = data['body'].encode('utf-8')
