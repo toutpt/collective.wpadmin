@@ -28,13 +28,13 @@ setup(name='collective.wpadmin',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'collective.configviews',
           'collective.js.jqueryui',
-          'plone.api',
           'collective.js.datatables',
           'collective.quickupload',
-          'collective.configviews',
-          'plone.namedfile',
+          'plone.api',
           'plone.formwidget.namedfile',
+          'plone.namedfile',
           # -*- Extra requirements: -*-
       ],
       extras_require=dict(
