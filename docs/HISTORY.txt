@@ -4,7 +4,9 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- fix quick press's create_post: respect blog_type settings
+- fix draft widget: respect blog_type settings
+
 
 
 1.0a2 (2013-01-17)
