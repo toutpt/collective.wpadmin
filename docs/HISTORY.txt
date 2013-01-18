@@ -4,7 +4,7 @@ Changelog
 1.0a4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add blobs extra deps for plone.namedfile (support 1.0.6)
 
 
 1.0a3 (2013-01-17)

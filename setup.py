@@ -34,7 +34,7 @@ setup(name='collective.wpadmin',
           'collective.quickupload',
           'plone.api',
           'plone.formwidget.namedfile',
-          'plone.namedfile',
+          'plone.namedfile[blobs]',
           # -*- Extra requirements: -*-
       ],
       extras_require=dict(
